@@ -1,0 +1,18 @@
+{
+  "name": "blok-tech-team",
+  "version": "1.0.0",
+  "description": "This is a team project for blok-tech",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Blok-Tech-Team-4A"
+  },
+  "keywords": [
+    "blok-tech-team"
+  ],
+  "author": "Rosalie Groen, Sena Nur Korkutan, Donna Stam, Sang Dinh",
+  "license": "MIT"
+}
