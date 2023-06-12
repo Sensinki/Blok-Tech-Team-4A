@@ -1,13 +1,10 @@
-/* eslint-disable require-jsdoc */
 /* eslint-disable max-len */
 // Vereiste modules importeren
 require('dotenv').config(); // Laadt de omgevingsvariabelen uit het .env-bestand
 const express = require('express');
 const app = express();
-const {engine} = require('express-handlebars');
+const {engine} = require('express-handlebars'); // View-engine voor het renderen van handlebars-templates
 const {MongoClient} = require('mongodb'); // MongoDB-client voor database-interactie
-const User = require('./models/user');
-const users = [];
 
 // Omgevingsvariabelen ophalen
 const {MONGO_URI, API_KEY} = process.env;
@@ -106,6 +103,78 @@ app.post('/login', async (req, res) => {
   return res.redirect(loggedInUrl);
 });
 
+app.get('/signup', function(req, res) {
+  res.render('signup', {title: 'Signup', bodyClass: 'signup-body'});
+});
+
+// Aanmeldingsgegevens verwerken
+app.post('/signup', async (req, res) => {
+  const {username, password, email} = req.body;
+
+  // Verbinding maken met de MongoDB-database
+  await client.connect();
+  const database = client.db('chatlingo');
+  const usersCollection = database.collection('users');
+
+  // Controleren of de gebruikersnaam al bestaat
+  const existingUser = await usersCollection.findOne({username});
+  if (existingUser) {
+    return res.render('signup', {
+      error: 'Username already exists.',
+      title: 'Signup',
+      bodyClass: 'signup-body',
+    });
+  }
+
+  // Het wachtwoord hashen met bcrypt
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // Nieuwe gebruiker toevoegen aan de database
+  await usersCollection.insertOne({
+    username,
+    password: hashedPassword,
+    email,
+  });
+
+  // Sessie instellen voor de aangemelde gebruiker
+  req.session.username = username;
+
+  const loggedInUrl = '/';
+  return res.redirect(loggedInUrl);
+});
+
+// Uitloggen
+app.get('/logout', function(req, res) {
+  // Sessie vernietigen en gebruiker uitloggen
+  req.session.destroy(function(err) {
+    if (err) {
+      console.log(err);
+    }
+    res.redirect('/login');
+  });
+});
+
+// Account verwijderen
+app.get('/delete-account', async function(req, res) {
+  const {username} = req.session;
+
+  // Verbinding maken met de MongoDB-database
+  await client.connect();
+  const database = client.db('chatlingo');
+  const usersCollection = database.collection('users');
+
+  // Gebruiker verwijderen uit de database
+  await usersCollection.deleteOne({username});
+
+  // Sessie vernietigen en gebruiker uitloggen
+  req.session.destroy(function(err) {
+    if (err) {
+      console.log(err);
+    }
+    res.redirect('/login');
+  });
+});
+
 // Homepage weergeven
 app.get('/', checkSession, async function(req, res) {
   const username = req.session.username || '';
@@ -127,69 +196,6 @@ app.get('/', checkSession, async function(req, res) {
     chats: updatedChats,
     title: 'Homepage',
   });
-});
-
-// making an account
-app.post('/sign-up', async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-    const user = new User({
-      name: req.body.name,
-      username: req.body.username,
-      email: req.body.email,
-      password: hashedPassword,
-    });
-
-    await user.save();
-
-    // Store the email in the session
-    req.session.email = req.body.email;
-
-    res.redirect('/login');
-  } catch (e) {
-    console.log('signup failed');
-    res.redirect('/sign-up');
-  }
-  console.log(users);
-});
-
-app.post('/profile', (req, res) => {
-  res.render('profile', {title: 'Profile', name: req.user.name});
-});
-
-app.get('/sign-up', (req, res) => {
-  res.render('sign-up', {title: 'Sign in'});
-});
-
-app.get('/deletedaccount', (req, res) => {
-  res.render('deletedaccount', {title: 'Deleted Account'});
-});
-
-// LOGOUT
-app.post('/logout', (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).send('Could not log out.');
-    } else {
-      return res.redirect('/login');
-    }
-  });
-});
-
-// DELETE ACCOUNT
-app.post('/delete', async (req, res) => {
-  const userEmail = req.session.email;
-
-  try {
-    await User.findOneAndDelete({email: userEmail});
-    req.session.destroy();
-    res.redirect('/deletedaccount');
-    console.log('Account deleted successfully');
-  } catch (error) {
-    console.log(error);
-    res.redirect('/profile');
-  }
 });
 
 // Chatpagina weergeven
@@ -214,12 +220,11 @@ app.get('/chat/:chatName', checkSession, async (req, res) => {
   });
 
   res.render('chat', {
-    layout: false,
     messages: [],
     username: username,
     chatName: chatName,
     chats: updatedChats,
-    profilePicture: chat ? chat.profilePicture : '',
+    profilePicture: chat ? chat.profilePicture : '', // Controleer of chat gedefinieerd is
   });
 });
 
@@ -253,6 +258,7 @@ app.use(function(req, res) {
 });
 
 // Functie om het aantal ongelezen berichten op te halen
+// eslint-disable-next-line require-jsdoc
 async function getUnreadMessageCount(chatName, loggedInUser) {
   const unreadMessages = await messagesCollection.countDocuments({
     chatName,
@@ -263,6 +269,7 @@ async function getUnreadMessageCount(chatName, loggedInUser) {
 }
 
 // Start de server en Socket.IO-verbinding
+// eslint-disable-next-line require-jsdoc
 async function run() {
   try {
     await client.connect();
