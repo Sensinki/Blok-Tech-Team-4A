@@ -1,0 +1,112 @@
+body {
+    height: 100%;
+    width: 100%;
+    background-color: whitesmoke;
+    padding: 0;
+    margin: 0;
+    background-image: linear-gradient(#9cdcec,#ffffff);
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    color: red;
+}
+
+h2,
+h3 {
+    text-align: center;
+    color: #9cb4ec;
+    font-size: 2rem;
+    margin: 1rem;
+}
+
+#userLike {
+    background-color: whitesmoke;
+    width: 100%;
+    height: 72vh;
+    padding: 0.5rem;
+    max-width: 20rem;
+    border-radius: 15px;
+    margin-top: 5rem;
+    /* margin-bottom: 9rem; */
+    -webkit-box-shadow: 6px 7px 33px -8px rgba(0,0,0,0.15);
+    -moz-box-shadow: 6px 7px 33px -8px rgba(0,0,0,0.15);
+    box-shadow: 0px 7px 33px -8px rgba(0,0,0,0.35);
+
+}
+
+img {
+    display: flex;
+    justify-content: center;
+    max-width: 20rem;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+}
+
+.DisLikeButton {
+    background-color: whitesmoke;
+    color: #9cb4ec;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    line-height: 52px;
+    text-decoration: none;
+    /* border: solid 2px; */
+    /* border-color: #9cb4ec; */
+    margin: 1rem 2rem;
+    margin-left: 5rem;
+}
+
+.LikeButton {
+    background-color: #9cb4ec;
+    /* background-image: url("heart2.svg"); */
+    color: white;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    line-height: 52px;
+    text-decoration: none;
+    border: none;
+    /* border: solid 2px; */
+    /* border-color: #9cb4ec; */
+    float: right;
+    margin: 1rem 0rem;
+    margin-right: 5rem;
+}
+
+.userimg {
+    background-color: #9cb4ec;
+    background-image: url("img/Sang.cv.jpg");
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    height: 50vh;
+    background-size: 100%;
+}
+
+.heartbrokeBtn {
+    background-image: url(img/brokeheart.svg);
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: 100%;
+}
+
+.heartBtn {
+    background-image: url(img/heart2.svg);
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: cover;
+    background-position: 50%;
+}

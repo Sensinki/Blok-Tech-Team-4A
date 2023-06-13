@@ -1,0 +1,22 @@
+{{> header }}
+
+<body>
+    <h2>Match</h2>
+    <section>
+        <form id="userLike" method="POST" action="/like">
+            <h3>Karen</h3>
+            {{!-- <img src="img/Sang.cv.jpg" alt="Karen"> --}}
+            <div class="userimg"></div>
+            <p></p>
+            <button type="button" class="DisLikeButton">
+                <div class="heartbrokeBtn"></div>
+            </button>
+            <button type="submit" class="LikeButton" name="like" value="Karen">
+                <div class="heartBtn"></div>
+            </button>
+        </form>
+    </section>
+    
+</body>
+<script src="script.js"></script>
+</html>
