@@ -1,16 +1,43 @@
-{{! this is a comment}}
+{{!-- DIVJES ZIJN GEBRUIKT VOOR VORMGEVING!!! --}}
 
-<main>
+<body>
+    <header>
+        <h2 class="header-left">
+            Chats
+        </h2>
+        <section class="header-right">
+        <a href="/delete-account" id="delete-account-link">Account verwijderen</a>
+            <img src="https://e7.pngegg.com/pngimages/273/380/png-clipart-round-world-flag-flags-of-the-world-globe-world-flag-country-miscellaneous-flag.png"
+                alt="Profile Picture" />
+        </section>
+    </header>
+    <div class="round-top"></div>
+    {{#each chats}}
+    <a class="chatName" href="/chat/{{this.chatName}}">
+        <section class="chat-container">
+            <div class="chat">
+                <section class="chat-left">
+                    <div class="profile-status-container">
+                        <section class="profile-picture-container">
+                            <img src="{{this.profilePicture}}" alt="Profile Picture" />
+                        </section>
+                    </div>
+                </section>
+                <section class="chat-right">
+                    <section class="chat-header">
+                        <div class="chat-name">{{this.chatName}}</div>
+                        <div class="new-message-indicator">{{this.newMessageCount}}</div>
+                    </section>
+                    <div class="chat-last-message">{{this.lastMessage}}</div>
+                </section>
+            </div>
+        </section>
+    </a>
+    {{/each}}
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/home.js"></script>
+    <script src="/js/window.js"></script>
+ 
+</body>
 
-{{> header-hp }}
-<section>
-<h1 class="welcome">WELCOME!</h1>
-<p>Join and discover new friends to play with!</p>
-</section>
-
-<button>
-    <a href="/sign-up">SIGN UP</a>
-</button>
-<p>Don't have an account? <a href="/login" class="sign-up">Login<a></p>
-
-</main>
+</html>

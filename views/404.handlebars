@@ -1,17 +1,28 @@
-<main class="errorstatus">
+{{!-- 404.handlebars --}}
+<html>
 
-    {{!-- https://codepen.io/honeybadger2788/pen/oNzKzvy --}}
-    <section class="err">
-        <h1>404</h1>
-        <p>PAGE NOT FOUND</p>
-    <br>
-        <h2>
-            <a href="/profile">BACK TO THE PAST hi</a>
-        </h2>
-        <img src="https://assets.codepen.io/5647096/Delorean.png" alt="#">
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tinos&display=swap" />
+  <link href="https://fonts.googleapis.com/css?family=Nunito:500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+</head>
 
-    </section>
+<body class="hello">
+  <section class="container">
+    <h2>Click on my face</h2>
+    <div id="click-me"></div>
+    <h1>404</h1>
+    <p>Hello, is it me you're looking for?</p>
+    <a href="/">Go home Lionel you're drunk</a>
+  </section>
 
+  <audio id="hello-audio">
+    {{!-- https://youtu.be/mHONNcZbwDY --}}
+    <source src="/static/mp3/hello.mp3" type="audio/mpeg" autoplay /> 
+  </audio>
 
-    
-</main>
+  <script src="/js/audio.js"></script>
+
+</body>
+
+</html>

@@ -1,30 +1,34 @@
-<main>
-    
-{{> header-hp }}
+<!-- login.handlebars -->
+<html class="inlog">
 
-<h1>WELCOME</h1>
+<body class="{{#if bodyClass}}{{bodyClass}}{{/if}}">
+    <h1>Login Page</h1>
+    {{#if error}}
+    <section class="error-message">
+        <p>{{error}}</p>
+    </section>
+    {{/if}}
+    <form id="login-form" method="POST" action="/login">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
 
-{{#if messages.error}}
-<span>{{messages.error}}</span>
-{{/if}}
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
 
-<form class="login" method="post" action="/login-check">
-    <div>
-    <label for="email">Email</label>
-    <input type="text" name="email" placeholder="kim34@gmail.com" minlength="7" maxlength="50" required>
-    </div>
-    <br>
+        <input type="submit" value="Login" />
+        <div class="g-recaptcha" data-sitekey="6LcnlJQmAAAAAKACWCv7uH09gDWbBsTbgjaKs9uz"></div>
+        <button class="g-recaptcha" data-sitekey="6LcnlJQmAAAAAKACWCv7uH09gDWbBsTbgjaKs9uz" data-callback='onSubmit'
+            data-action='submit'>Submit</button>
+    </form>
 
-    <div>
-    <label for="password">Password</label>
-    <input type="password" name="password" placeholder="*****" minlength="5" maxlength="50" required>
-    </div>
-    <br>
+    <a href="/signup">I don't have an account</a>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcnlJQmAAAAAKACWCv7uH09gDWbBsTbgjaKs9uz"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("login-form").submit();
+        }
+    </script>
+</body>
 
-    <input class="submit" 
-    type="submit" name="log" value="LOG IN">
-</form>
-
- <a href="/sign-up">I don't have an account</a>
-
-</main>
+</html>

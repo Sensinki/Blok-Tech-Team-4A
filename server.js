@@ -142,6 +142,9 @@ app.post("/signup", async (req, res) => {
   return res.redirect(loggedInUrl);
 });
 
+
+
+
 // Uitloggen
 app.get("/logout", function (req, res) {
   // Sessie vernietigen en gebruiker uitloggen
@@ -173,6 +176,7 @@ app.get("/delete-account", async function (req, res) {
     res.redirect("/login");
   });
 });
+
 
 // Homepage weergeven
 app.get("/", checkSession, async function (req, res) {
