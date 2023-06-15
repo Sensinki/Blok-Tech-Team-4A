@@ -15,7 +15,7 @@ const url = process.env.DB_CONNECTION_STRING;
 
 let result;
 
-async function connectToMongoDB(index) {
+async function connectToMongoDB() {
   try {
     const client = new MongoClient(url);
     await client.connect();
@@ -26,13 +26,13 @@ async function connectToMongoDB(index) {
     const collection = db.collection('gamesData');
 
     const likedUsers = [
-      { name: 'Abdel', image: '/css/img/profiles/abdel.jpeg', game: 'Minecraft' },
-      { name: 'Karen', image: '/css/img/profiles/Sang.cv.jpg', game: 'Valorand' },
-      { name: 'Angelo', image: '/css/img/profiles/angelo.jpeg', game: 'LOL' },
+        {name: 'Valorant', image: '/css/img/profiles/valorant.jpeg', game: 'Valorant'},
+        {name: 'Minecraft', image: '/css/img/profiles/minecraft.jpeg', game: 'Minecraft'},
+        {name: 'League of Legend', image: '/css/img/profiles/lol.jpeg', game: 'LOL'},
+      
     ];
 
-    const selectedUser = likedUsers[index];
-    await collection.insertOne(selectedUser);
+    await collection.insertOne(likedUsers);
     result = await collection.find({}).toArray();
 
     client.close();
@@ -42,8 +42,9 @@ async function connectToMongoDB(index) {
   }
 }
 
-// Roep de functie aan om verbinding te maken met de database en een specifiek likedUser-object te sturen.
-connectToMongoDB(1); // Stuurt het tweede likedUser-object naar MongoDB (index 1).
+// Roep de functie aan om verbinding te maken met de database.
+connectToMongoDB();
+
 
 // --------------------------------------------------------------//
 
@@ -58,7 +59,7 @@ app.get('/match', match);
 app.get('/like', like);
 
 function match(req, res) {
-  res.render('match');
+  res.render('match', { likedUsers: result });
 }
 
 function like(req, res) {
