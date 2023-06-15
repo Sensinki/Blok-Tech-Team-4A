@@ -31,11 +31,11 @@ h3 {
 #userLike {
     background-color: whitesmoke;
     width: 100%;
-    height: 72vh;
+    height: 76vh;
     padding: 0.5rem;
     max-width: 20rem;
     border-radius: 15px;
-    margin-top: 5rem;
+    margin-top: 2rem;
     /* margin-bottom: 9rem; */
     -webkit-box-shadow: 6px 7px 33px -8px rgba(0,0,0,0.15);
     -moz-box-shadow: 6px 7px 33px -8px rgba(0,0,0,0.15);
@@ -53,24 +53,22 @@ img {
 }
 
 .DisLikeButton {
-    background-color: whitesmoke;
-    color: #9cb4ec;
+    background-color: transparent;
+    color: white;
     border-radius: 50%;
     display: inline-block;
     text-align: center;
-    width: 50px;
+    width: 60px;
     height: 50px;
     line-height: 52px;
     text-decoration: none;
-    /* border: solid 2px; */
-    /* border-color: #9cb4ec; */
+    border: none;
     margin: 1rem 2rem;
     margin-left: 5rem;
 }
 
 .LikeButton {
     background-color: #9cb4ec;
-    /* background-image: url("heart2.svg"); */
     color: white;
     border-radius: 50%;
     display: inline-block;
@@ -80,8 +78,6 @@ img {
     line-height: 52px;
     text-decoration: none;
     border: none;
-    /* border: solid 2px; */
-    /* border-color: #9cb4ec; */
     float: right;
     margin: 1rem 0rem;
     margin-right: 5rem;
@@ -93,14 +89,15 @@ img {
     border-radius: 10px;
     background-repeat: no-repeat;
     height: 50vh;
-    background-size: 100%;
+    background-size: cover;
 }
 
 .heartbrokeBtn {
     background-image: url(img/brokeheart.svg);
     background-repeat: no-repeat;
     height: 100%;
-    background-size: 100%;
+    background-size: cover;
+    background-position: 50%;
 }
 
 .heartBtn {
