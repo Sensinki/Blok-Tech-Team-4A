@@ -39,6 +39,23 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
+const gameSchema = new mongoose.Schema({
+  name: String,
+  image: String,
+  game: String,
+  liked: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const Game = mongoose.model("Game", gameSchema);
+
+let currentIndex = 0;
+let games = [];
+
+// Function to insert games data into the database
+
 app.use("/static", express.static("static"));
 app.use(express.static("public"));
 app.use("/js", express.static("public/js"));
@@ -91,7 +108,7 @@ app.post("/login", async (req, res) => {
 
   req.session.username = username;
 
-  const loggedInUrl = "/";
+  const loggedInUrl = "/match";
   return res.redirect(loggedInUrl);
 });
 
@@ -121,7 +138,7 @@ app.post("/signup", async (req, res) => {
 
   req.session.username = username;
 
-  const loggedInUrl = "/";
+  const loggedInUrl = "/match";
   return res.redirect(loggedInUrl);
 });
 
@@ -145,6 +162,44 @@ app.get("/delete-account", async function (req, res) {
     }
     res.redirect("/login");
   });
+});
+
+app.get("/match", checkSession, match);
+
+function match(req, res) {
+  Game.find({})
+    .then((foundGames) => {
+      games = foundGames;
+      if (currentIndex >= games.length) {
+        res.redirect("/");
+      } else {
+        console.log("Current Index:", currentIndex);
+        res.render("match", { game: games[currentIndex] });
+        currentIndex++;
+      }
+    })
+    .catch((error) => {
+      console.error("Error retrieving games:", error);
+    });
+}
+
+app.post("/match", async (req, res) => {
+  const gameId = req.body.gameId;
+  const like = req.body.like === "true";
+
+  try {
+    await Game.findByIdAndUpdate(gameId, { liked: like });
+    currentIndex++;
+
+    if (currentIndex >= games.length) {
+      res.redirect("/");
+    } else {
+      console.log("Current Index:", currentIndex);
+      res.render("match", { game: games[currentIndex] });
+    }
+  } catch (error) {
+    console.error("Error updating game:", error);
+  }
 });
 
 app.get("/", checkSession, async function (req, res) {

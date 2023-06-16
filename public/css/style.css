@@ -155,7 +155,7 @@ a {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index:10;
+  z-index: 10;
   height: 8em;
   border-radius: 0 0 50px 50px;
 }
@@ -470,7 +470,8 @@ a {
   height: 100vh;
   margin: 0 auto;
   text-align: center;
-  background-image: url("/static/images/lionel.png");/* https: //open.spotify.com/album/5R8J87WpdqO4t4pB4F4LNJ | Foto van het album + wat PhotoShop werk van mij*/
+  background-image: url("/static/images/lionel.png");
+  /* https: //open.spotify.com/album/5R8J87WpdqO4t4pB4F4LNJ | Foto van het album + wat PhotoShop werk van mij*/
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -580,13 +581,13 @@ a {
   margin: 0 auto;
   max-width: 100%;
   margin-top: 10%;
- z-index: 1;
+  z-index: 1;
 }
 
-@media (max-width: 500px){
-.fallback-message img {
-   margin-top: 65%;
-}
+@media (max-width: 500px) {
+  .fallback-message img {
+    margin-top: 65%;
+  }
 }
 
 /* INLOG */
@@ -773,4 +774,3 @@ header {
   animation: fallbackMessageAnimation 0.5s ease-in-out both;
   opacity: 0;
 }
-

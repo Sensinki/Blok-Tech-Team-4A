@@ -1,7 +1,7 @@
-const clickme = document.getElementById("click-me"); // Haal het element op met de ID "click-me" en sla het op in de variabele clickme
-const audio = document.getElementById("hello-audio"); // Haal het audio-element op met de ID "hello-audio" en sla het op in de variabele audio
+require("dotenv").config(); // Laad omgevingsvariabelen uit het .env-bestand
 
-clickme.addEventListener("click", () => {
-  // Voeg een klikgebeurtenisluisteraar toe aan het clickme-element
-  audio.play(); // Speel het audio-element af
-});
+module.exports = {
+  MONGO_URI: process.env.MONGO_URI, // MongoDB-verbinding URI
+  API_KEY: process.env.API_KEY, // API-sleutel
+  API_CAPTCHA: process.env.API_CAPTCHA,
+};

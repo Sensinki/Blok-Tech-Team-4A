@@ -1,67 +1,73 @@
-//home
-const chats = [
+const games = [
   {
-    chatName: "Mandarin",
-    profilePicture:
+    name: "Valorant",
+    image:
       "https://upload.wikimedia.org/wikipedia/commons/d/dd/Flag_of_chinese-speaking_countries_and_territories.svg",
-    newMessageCount: 2,
-    lastMessage: "你好!",
+    liked: false,
   },
   {
-    chatName: "Spanish",
-    profilePicture:
+    name: "Minecraft",
+    image:
       "https://plainlanguagenetwork.org/wp-content/uploads/2017/05/banderashispanas-200.jpg",
-    newMessageCount: 1,
-    lastMessage: "¿Cómo estás?",
+    liked: false,
   },
   {
-    chatName: "Greek",
-    profilePicture:
+    name: "Super Mario Bros",
+    image:
       "https://upload.wikimedia.org/wikipedia/commons/d/d2/Flag_of_Greece_and_Cyprus.svg",
-    newMessageCount: 1,
-    lastMessage: "Τι κάνεις;",
+    liked: false,
   },
   {
-    chatName: "Hindi",
-    profilePicture:
-      "https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg",
-    newMessageCount: 0,
-    lastMessage: "फिर मिलेंगे",
+    name: "League of Legends",
+    image: "https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg",
+    liked: false,
   },
   {
-    chatName: "English",
-    profilePicture:
+    name: "Call of Duty",
+    image:
       "https://cdn-eu.purposegames.com/images/game/bg/96/ZYdKhTOijhE.png?s=1400",
-    newMessageCount: 0,
-    lastMessage: "Hello!",
+    liked: false,
   },
   {
-    chatName: "Portugese",
-    profilePicture:
+    name: "PlayerUnknown's Battlegrounds",
+    image:
       "https://plainlanguagenetwork.org/wp-content/uploads/2017/07/Portuguese_Speaking_Country_Flags.png",
-    newMessageCount: 3,
-    lastMessage: "Bom dia",
+    liked: false,
   },
   {
-    chatName: "Dzongkha",
-    profilePicture:
+    name: "Overwatch 2",
+    image:
       "https://upload.wikimedia.org/wikipedia/commons/9/91/Flag_of_Bhutan.svg",
-    newMessageCount: 1,
-    lastMessage: "Na gi tshen gachi mo?",
+    liked: false,
   },
   {
-    chatName: "Russian",
-    profilePicture:
+    name: "Counter-Strike: Global Offensive",
+    image:
       "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
-    newMessageCount: 0,
-    lastMessage: "привет!",
+    liked: false,
   },
   {
-    chatName: "Rosalie",
-    profilePicture:
+    name: "Rocket League",
+    image:
       "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
-    newMessageCount: 0,
-    lastMessage: "привет!",
+    liked: false,
+  },
+  {
+    name: "Roblox",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
+    liked: false,
   },
 ];
+const likedGames = games.filter((game) => game.liked);
+
+const chats = likedGames.map((game) => {
+  return {
+    chatName: game.name,
+    profilePicture: game.image,
+    newMessageCount: 0,
+    lastMessage: "",
+  };
+});
+
 module.exports = chats;
