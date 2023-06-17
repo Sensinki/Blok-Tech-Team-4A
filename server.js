@@ -40,7 +40,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-const Game = require("./models/game")
 
 let currentIndex = 0;
 let games = [];
@@ -156,7 +155,7 @@ app.get("/delete-account", async function (req, res) {
 
 app.get("/match", checkSession, match);
 
-function match(req, res) {
+async function match(req, res) {
   Game.find({})
     .then((foundGames) => {
       games = foundGames;
@@ -172,6 +171,7 @@ function match(req, res) {
       console.error("Error retrieving games:", error);
     });
 }
+
 
 app.post("/match", async (req, res) => {
   const gameId = req.body.gameId;
@@ -193,6 +193,34 @@ app.post("/match", async (req, res) => {
 });
 
 // liked games
+
+const Game = require("./models/game")
+
+const allGames = [
+  {
+    name: "Valorant",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/d/dd/Flag_of_chinese-speaking_countries_and_territories.svg",
+    liked: true
+  },
+];
+
+// Save each game to the database
+async function saveGames() {
+  try {
+    for (const game of allGames) {
+      const newGame = new Game(game);
+      const savedGame = await newGame.save();
+      console.log("Game saved:", savedGame);
+    }
+  } catch (error) {
+    console.error("Error saving games:", error);
+  }
+}
+
+saveGames();
+
+
 console.log(chats)
 async function getLikedChats(username) {
   try {
