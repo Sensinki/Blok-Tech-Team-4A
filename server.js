@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 // Vereiste modules importeren
+//hoi
 require('dotenv').config(); // Laadt de omgevingsvariabelen uit het .env-bestand
 const express = require('express');
 const app = express();
