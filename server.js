@@ -40,22 +40,9 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-const gameSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  game: String,
-  liked: {
-    type: Boolean,
-    default: false,
-  },
-});
-
-const Game = mongoose.model("Game", gameSchema);
-
 let currentIndex = 0;
 let games = [];
 
-// Function to insert games data into the database
 
 app.use("/static", express.static("static"));
 app.use(express.static("public"));
@@ -203,19 +190,41 @@ app.post("/match", async (req, res) => {
   }
 });
 
+// liked games
+console.log(chats)
+async function getLikedChats(username) {
+  try {
+    const likedGameId = await Game.find({ liked: true }, "_id");
+    const likedGameIdArray = likedGameId.map((game) => game._id);
+
+    const likedChats = chats.filter((chat) =>
+      likedGameIdArray.includes(chat.chatName)
+    );
+
+    const updatedChats = await Promise.all(
+      likedChats.map(async (chat) => {
+        const unreadMessageCount = await getUnreadMessageCount(
+          chat.chatName,
+          username
+        );
+
+        return { ...chat, newMessageCount: unreadMessageCount };
+      })
+    );
+
+    return updatedChats;
+  } catch (error) {
+    console.error("Error retrieving liked chats:", error);
+    return []; 
+  }
+}
+
+
 app.get("/", checkSession, async function (req, res) {
   const username = req.session.username || "";
   console.log("Huidige gebruikersnaam:", username);
 
-  const updatedChats = await Promise.all(
-    chats.map(async (chat) => {
-      const unreadMessageCount = await getUnreadMessageCount(
-        chat.chatName,
-        username
-      );
-      return { ...chat, newMessageCount: unreadMessageCount };
-    })
-  );
+  const updatedChats = await getLikedChats(username);
 
   res.render("home", {
     username: username,
