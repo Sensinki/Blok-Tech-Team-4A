@@ -40,6 +40,8 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
+const Game = require("./models/game")
+
 let currentIndex = 0;
 let games = [];
 
