@@ -32,7 +32,7 @@
     "slug": "^8.2.2",
     "socket.io": "^4.6.1",
     "web-push": "^3.6.1",
-    "xss": "^1.0.14",
+    "xss": "^1.0.14"
   },
   "devDependencies": {
     "eslint": "^8.41.0",

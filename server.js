@@ -19,7 +19,7 @@ const io = require("socket.io")(http);
 
 const PORT = process.env.PORT || 3000;
 
-const chats = require("./build/js/home");
+const chats = require("./build/js/home.min.js");
 
 // Models
 const Message = require("./models/messageModel");
@@ -43,7 +43,6 @@ app.use(express.urlencoded({ extended: true }));
 
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const MemoryStore = require("memorystore")(session);
 
 const checkSession = (req, res, next) => {
     if (!req.session.username) {
@@ -58,7 +57,6 @@ const sessionMiddleware = session({
     secret: "geheim-woord",
     resave: false,
     saveUninitialized: true,
-    store: new MemoryStore(),
     cookie: { secure: false },
 });
 app.use(sessionMiddleware);
