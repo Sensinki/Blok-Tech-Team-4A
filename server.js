@@ -17,7 +17,7 @@ mongoose.connect(MONGO_URI, {
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 3000;
 
 const chats = require("./build/js/home.min.js");
 
@@ -173,6 +173,74 @@ app.post("/match", async (req, res) => {
     }
 });
 
+// liked games
+
+// const Game = require("./models/gameModel");
+// const allGames = [
+//     {
+//         name: "Valorant",
+//         image: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Flag_of_chinese-speaking_countries_and_territories.svg",
+//         liked: false,
+//     },
+//     {
+//         name: "Minecraft",
+//         image: "https://plainlanguagenetwork.org/wp-content/uploads/2017/05/banderashispanas-200.jpg",
+//         liked: false,
+//     },
+//     {
+//         name: "Super Mario Bros",
+//         image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Flag_of_Greece_and_Cyprus.svg",
+//         liked: false,
+//     },
+//     {
+//         name: "League of Legends",
+//         image: "https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg",
+//         liked: false,
+//     },
+//     {
+//         name: "Call of Duty",
+//         image: "https://cdn-eu.purposegames.com/images/game/bg/96/ZYdKhTOijhE.png?s=1400",
+//         liked: false,
+//     },
+//     {
+//         name: "PlayerUnknown's Battlegrounds",
+//         image: "https://plainlanguagenetwork.org/wp-content/uploads/2017/07/Portuguese_Speaking_Country_Flags.png",
+//         liked: false,
+//     },
+//     {
+//         name: "Overwatch 2",
+//         image: "https://upload.wikimedia.org/wikipedia/commons/9/91/Flag_of_Bhutan.svg",
+//         liked: false,
+//     },
+//     {
+//         name: "Counter-Strike: Global Offensive",
+//         image: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
+//         liked: false,
+//     },
+//     {
+//         name: "Rocket League",
+//         image: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
+//         liked: false,
+//     },
+//     {
+//         name: "Roblox",
+//         image: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
+//         liked: false,
+//     },
+// ];
+
+// async function saveGames() {
+//     try {
+//         for (const game of allGames) {
+//             const newGame = new Game(game);
+//             const savedGame = await newGame.save();
+//             console.log("Game saved:", savedGame);
+//         }
+//     } catch (error) {
+//         console.error("Error saving games:", error);
+//     }
+// }
+// saveGames();
 
 app.get("/", checkSession, async function (req, res) {
     const username = req.session.username || "";
@@ -242,11 +310,72 @@ app.use(function (req, res) {
     res.status(404).render("404", { title: "404 Not Found :(" });
 });
 
+async function getUnreadMessageCount(chatName, loggedInUser) {
+    const unreadMessages = await Message.countDocuments({
+        chatName,
+        sender: { $ne: loggedInUser },
+        read: false,
+    });
+    return unreadMessages;
+}
 
+async function run() {
+    try {
+        await mongoose.connect(MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+
+        console.log("MONGODB IS HIER YUH :)");
+
+        io.use((socket, next) => {
+            sessionMiddleware(socket.request, {}, next);
+        });
+
+        io.on("connection", async (socket) => {
+            const chatName = socket.handshake.headers.referer.split("/").pop();
+            console.log(`User ${socket.request.session.username} connected in ${chatName}`);
+            socket.join(chatName);
+
+            if (socket.request.session && socket.request.session.username) {
+                const loggedInUser = socket.request.session.username;
+                console.log(`User ${loggedInUser} is ingelogd`);
+                io.to(socket.id).emit("loggedInUser", loggedInUser);
+            } else {
+                console.log("Er is niet ingelogd");
+            }
+
+            socket.on("disconnect", () => {
+                console.log(`User ${socket.request.session.username} disconnected from ${chatName}`);
+            });
+            const chatHistory = await Message.find({ chatName }).exec();
+
+            socket.emit("chatHistory", chatHistory);
+
+            socket.on("message", async (msg) => {
+                const sender = socket.request.session.username;
+                const timestamp = Date.now();
+                const message = new Message({
+                    ...msg,
+                    chatName,
+                    sender,
+                    timestamp,
+                    read: false,
+                });
+                await message.save();
+
+                io.to(chatName).emit("message", { ...msg, sender, timestamp });
+                console.log(`Message toegevoegd aan MongoDB: ${msg.content}`);
+            });
+        });
+    } catch (err) {
+        console.log(err);
+    } finally {
+        // await client.close();
+    }
+}
+
+run();
 http.listen(PORT, () => {
     console.log(`Server gestart op poort ${PORT}`);
 });
-
-
-
-
