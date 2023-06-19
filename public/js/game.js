@@ -1,3 +1,4 @@
+
 // game.js
 const games = [
   {
@@ -89,34 +90,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const gameGame = document.querySelector("p");
     gameGame.textContent = currentGame.game;
   }
-  likeButton.addEventListener("click", function (event) {
+
+  likeButton.addEventListener("click", function(event) {
     event.preventDefault();
+    let liked = true;
+    const currentGame = games[currentGameIndex];
+    // AJAX request
+    var xhr = new XMLHttpRequest;
 
-    let liked;
-    // Update de like-status
-    liked = true;
+    xhr.open("POST", "/match", true); 
+    xhr.setRequestHeader("Content-Type", "application/json"); 
 
-    // Maak een AJAX-verzoek naar de server om de like-status door te geven
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/match", true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-
-    // Stuur de like-status als JSON naar de server
-    xhr.send(JSON.stringify({ liked: liked }));
-
-    // Verwerk het antwoord van de server indien nodig
+    xhr.send(JSON.stringify({ 
+      liked: liked, 
+      gameName: currentGame.name, 
+      gameImage: currentGame.image,
+      gameCode: currentGame.game 
+    }));  
+    
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
-          // Het verzoek is succesvol verwerkt
-          console.log("Like-status succesvol naar de server verzonden");
+          console.log("succesfully sent to the server");
         } else {
-          // Er is een fout opgetreden bij het verwerken van het verzoek
-          console.error(
-            "Fout bij het verzenden van de like-status naar de server"
-          );
+          console.error("failed");
         }
       }
     };
-  });
+  });   
 });
