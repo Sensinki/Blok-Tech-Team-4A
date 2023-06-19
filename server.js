@@ -19,7 +19,7 @@ const io = require("socket.io")(http);
 
 const PORT = process.env.PORT || 3000;
 
-const chats = require("./public/js/home");
+const chats = require("./build/js/home.min.js");
 
 const messageSchema = new mongoose.Schema({
   chatName: String,
@@ -40,14 +40,12 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-
 let currentIndex = 0;
 let games = [];
 
-
 app.use("/static", express.static("static"));
-app.use(express.static("public"));
-app.use("/js", express.static("public/js"));
+app.use(express.static("build"));
+app.use("/js", express.static("build/js"));
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");
@@ -56,6 +54,7 @@ app.get("/api/api-key", (req, res) => {
 });
 
 app.use(express.urlencoded({ extended: true }));
+
 
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
@@ -172,7 +171,6 @@ async function match(req, res) {
     });
 }
 
-
 app.post("/match", async (req, res) => {
   const gameId = req.body.gameId;
   const like = req.body.like === "true";
@@ -194,14 +192,14 @@ app.post("/match", async (req, res) => {
 
 // liked games
 
-const Game = require("./models/game")
+const Game = require("./models/game");
 
 const allGames = [
   {
     name: "Valorant",
     image:
       "https://upload.wikimedia.org/wikipedia/commons/d/dd/Flag_of_chinese-speaking_countries_and_territories.svg",
-    liked: true
+    liked: true,
   },
 ];
 
@@ -220,8 +218,7 @@ async function saveGames() {
 
 saveGames();
 
-
-console.log(chats)
+console.log(chats);
 async function getLikedChats(username) {
   try {
     const likedGameId = await Game.find({ liked: true }, "_id");
@@ -245,10 +242,9 @@ async function getLikedChats(username) {
     return updatedChats;
   } catch (error) {
     console.error("Error retrieving liked chats:", error);
-    return []; 
+    return [];
   }
 }
-
 
 app.get("/", checkSession, async function (req, res) {
   const username = req.session.username || "";

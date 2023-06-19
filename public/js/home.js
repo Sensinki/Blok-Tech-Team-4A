@@ -1,6 +1,6 @@
 const games = [
   {
-    name: "Valorant",
+    name: "hoi",
     image:
       "https://upload.wikimedia.org/wikipedia/commons/d/dd/Flag_of_chinese-speaking_countries_and_territories.svg",
     liked: false,
