@@ -173,8 +173,28 @@ app.post("/match", async (req, res) => {
     }
 });
 
-// liked games
+//
+app.post("/match", async (req, res) => {
+    const { liked, gameName, gameImage, gameCode } = req.body;
+    if (liked) {
+        // Add the game to the user's liked games
+        await User.findByIdAndUpdate(req.user._id, {
+            $push: {
+                likedGames: {
+                    liked,
+                    gameName,
+                    gameImage,
+                    gameCode,
+                },
+            },
+        });
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(400);
+    }
+});
 
+// liked games
 // const Game = require("./models/gameModel");
 // const allGames = [
 //     {
