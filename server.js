@@ -19,7 +19,7 @@ const io = require("socket.io")(http);
 
 const PORT = process.env.PORT || 3000;
 
-const chats = require("./public/js/home");
+const chats = require("./build/js/home");
 
 // Models
 const Message = require("./models/messageModel");
@@ -30,8 +30,8 @@ let currentIndex = 0;
 let games = [];
 
 app.use("/static", express.static("static"));
-app.use(express.static("public"));
-app.use("/js", express.static("public/js"));
+app.use(express.static("build"));
+app.use("/js", express.static("build/js"));
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");

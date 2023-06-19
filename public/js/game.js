@@ -54,7 +54,6 @@ const games = [
 ];
 
 
-
 document
   .querySelector(".LikeButton")
   .addEventListener("click", function (event) {
@@ -120,4 +119,3 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   });   
 });
-
