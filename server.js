@@ -394,6 +394,17 @@ async function run() {
         // await client.close();
     }
 }
+// app.get('/like', async (req, res) => {res.render('like')});
+app.get("/like", checkSession, async function (req, res) {
+    res.render("like", {
+        title: "Like",
+    });
+});
+
+// hier data sang ophalen en renderen
+
+
+//data aanpassen als je klikt
 
 run();
 http.listen(PORT, () => {
