@@ -1,65 +1,14 @@
-<header>
-
-</header>
-
 <body>
     <h1>Liked chats</h1>
-    <section class="listLiked"> 
+    <section class="listLiked">
     </section>
 
-    <section class="list"> 
-      <form id="gameForm" action="/like" method="POST" onclick="submitForm()">
-        <input type="checkbox" id="Minecraft" class="heart-checkbox" name="game" value="Minecraft">
-        <label for="Minecraft" class="heart-label">Minecraft</label>
-      </form>
-
-      <form onclick="submitForm()">
-        <input type="checkbox" id="Valorant" class="heart-checkbox">
-        <label for="Valorant" class="heart-label">Valorant</label>
-      </form>
-   
-      </form onclick="submitForm()">
-        <input type="checkbox" id="MarioBros" class="heart-checkbox">
-        <label for="MarioBros" class="heart-label">Mario Bros</label>
-      </form>
-      
-      <form onclick="submitForm()">
-        <input type="checkbox" id="LeagueOfLegends" class="heart-checkbox">
-        <label for="LeagueOfLegends" class="heart-label">League of Legends</label>
-      </form>
-
-      <form onclick="submitForm()">
-        <input type="checkbox" id="CallOfDuty" class="heart-checkbox">
-        <label for="CallOfDuty" class="heart-label">Call of Duty</label>
-      </form>
-
-      <form onclick="submitForm()">
-        <input type="checkbox" id="PUBG" class="heart-checkbox">
-        <label for="PUBG" class="heart-label">PlayerUnknown's Battlegrounds</label>
-      </form>
-
-      <form onclick="submitForm()">
-        <input type="checkbox" id="Overwatch2" class="heart-checkbox">
-        <label for="Overwatch2" class="heart-label">Overwatch 2</label>
-      </form>
-
-      <form onclick="submitForm()">
-        <input type="checkbox" id="CSGO" class="heart-checkbox">
-        <label for="CSGO" class="heart-label">CSGO</label>
-      </form>
-
-      <form onclick="submitForm()">
-        <input type="checkbox" id="Roblox" class="heart-checkbox">
-        <label for="Roblox" class="heart-label">Roblox</label>
-      </form>
-
-      <form onclick="submitForm()">
-        <input type="checkbox" id="RocketLeague" class="heart-checkbox">
-        <label for="RocketLeague" class="heart-label">Rocket League</label> 
-      </form>
+    <section class="list">
+        {{#each games}}
+        <form id="gameForm" action="/like" method="POST" onclick="submitForm()">
+            <input type="checkbox" id="{{this.id}}" class="heart-checkbox" name="game" value="{{this.name}}">
+            <label for="{{this.id}}" class="heart-label">{{this.name}}</label>
+        </form>
+        {{/each}}
     </section>
 </body>
-
-<footer>
-
-</footer>

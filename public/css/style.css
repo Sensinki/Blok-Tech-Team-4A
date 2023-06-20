@@ -550,11 +550,6 @@ a {
 
 @media (min-width: 70em) {
 
-  form {
-    /* sizes */
-    width: 20em;
-    height: 90%;
-  }
 
   /* 404 page */
   .err h1 {
