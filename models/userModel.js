@@ -1,23 +1,6 @@
 /* eslint-disable indent */
 const mongoose = require("mongoose");
 
-// const userSchema = new mongoose.Schema({
-//     username: String,
-//     password: String,
-//     email: String,
-//     // likedGames: [
-//     //    {
-//     //       "name: "Roblox",
-//     //       "image": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
-//     //       "liked": {false},
-//     //    },
-//     //    {
-//     //       "name" : "",
-//     //       "image" : 2
-//     //    },
-//     // ]
-// });
-
 const GameSchema = new mongoose.Schema({
     liked: Boolean,
     gameName: String,
@@ -26,8 +9,9 @@ const GameSchema = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema({
-    name: String,
-    address: String,
+    username: String,
+    password: String,
+    email: String,
     likedGames: [GameSchema],
 });
 
