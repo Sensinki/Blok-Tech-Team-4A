@@ -4,16 +4,18 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const { MongoClient } = require('mongodb');
+const {MongoClient} = require('mongodb');
 const bodyParser = require('body-parser');
-const { engine } = require('express-handlebars');
+const {engine} = require('express-handlebars');
 
 require('dotenv').config();
 
-// -------------MONGO_DB-----------------------------------------//
+// -------------------MONGO_DB-----------------------------------------//
 const url = process.env.DB_CONNECTION_STRING;
 
 let result;
+let likedUsers = [];
+
 
 async function connectToMongoDB() {
   try {
@@ -25,15 +27,14 @@ async function connectToMongoDB() {
     const db = client.db('dataTeam');
     const collection = db.collection('gamesData');
 
-    const likedUsers = [
-        {name: 'Valorant', image: '/css/img/profiles/valorant.jpeg', game: 'Valorant'},
-        {name: 'Minecraft', image: '/css/img/profiles/minecraft.jpeg', game: 'Minecraft'},
-        {name: 'League of Legend', image: '/css/img/profiles/lol.jpeg', game: 'LOL'},
-      
+    const initialLikedUsers = [
+      {name: 'Valorant', image: '/css/img/profiles/valorant.jpeg', game: 'Valorant', liked: true},
+      {name: 'Minecraft', image: '/css/img/profiles/minecraft.jpeg', game: 'Minecraft', liked: false},
+      {name: 'League of Legend', image: '/css/img/profiles/lol.jpeg', game: 'LOL', liked: true},
     ];
 
-    await collection.insertOne(likedUsers);
-    result = await collection.find({}).toArray();
+    await collection.insertMany(initialLikedUsers);
+    likedUsers = await collection.find({}).toArray();
 
     client.close();
     console.log('Verbinding met de database gesloten.');
@@ -48,10 +49,10 @@ connectToMongoDB();
 
 // --------------------------------------------------------------//
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/static'));
 
-app.engine('handlebars', engine({ defaultLayout: 'main' }));
+app.engine('handlebars', engine({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.set('views', 'views');
 
@@ -59,11 +60,11 @@ app.get('/match', match);
 app.get('/like', like);
 
 function match(req, res) {
-  res.render('match', { likedUsers: result });
+  res.render('match', {likedUsers: result});
 }
 
 function like(req, res) {
-  res.render('like');
+  res.render('like', { likedUsers: likedUsers });
 }
 
 let likedUserProfile;
@@ -71,11 +72,11 @@ let likedUserProfile;
 app.post('/like', (req, res) => {
   const likedUser = req.body.like;
   likedUserProfile = likedUser;
-  res.render('like', { likedUser });
+  res.render('like', {likedUser});
 });
 
 app.get('/like', (req, res) => {
-  res.render('like', { likedUserProfile });
+  res.render('like', {likedUserProfile});
 });
 
 app.listen(PORT, () => {

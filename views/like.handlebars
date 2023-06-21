@@ -1,12 +1,20 @@
 {{> header }}
-
+<!--- like.handlebars --->
 <body>
     <h2>Gelukt!</h2>
     <section>
-    
-   {{!-- <h1>halloo</h1> --}}
-   <h1>{{likedUserProfile}}</h1>
+        <h1>{{likedUserProfile}}</h1>
+        <section>
 
-    </section>
-</body>
+            <h1>{{ this.name }}</h1>
+            <form class="yourTopics" action="/like" method="POST">
+                {{#each likedUsers}}
+                    
+                    <span id="topics">{{ this.game }}</span>
+                {{/each}}
+
+                <button class="removebtn" type="submit">x</button>
+            </form>
+        </section>
+    </body>
 </html>
