@@ -3,7 +3,6 @@ const app = express();
 const { engine } = require("express-handlebars");
 const { API_KEY } = process.env;
 
-
 app.use("/static", express.static("static"));
 app.use(express.static("build"));
 app.use("/js", express.static("build/js"));
@@ -19,13 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
-const checkSession = (req, res, next) => {
-  if (!req.session.username) {
-    return res.redirect("/login");
-  }
-  next();
-};
-
 app.use(cookieParser());
 
 const sessionMiddleware = session({
@@ -35,3 +27,12 @@ const sessionMiddleware = session({
   cookie: { secure: false },
 });
 app.use(sessionMiddleware);
+
+const checkSession = (req, res, next) => {
+  if (!req.session.username) {
+    return res.redirect("/login");
+  }
+  next();
+};
+
+module.exports = { sessionMiddleware, checkSession };
