@@ -296,11 +296,12 @@ app.get("/chat/:chatName", checkSession, async (req, res) => {
     });
 
     res.render("chat", {
-        messages: [],
-        username: username,
-        chatName: chatName,
-        chats: updatedChats,
-        profilePicture: chat ? chat.profilePicture : "",
+      layout: false,
+      messages: [],
+      username: username,
+      chatName: chatName,
+      chats: updatedChats,
+      profilePicture: chat ? chat.profilePicture : "",
     });
 });
 
