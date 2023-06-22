@@ -39,8 +39,8 @@ Now you can run the project. Write your terminal `npm start`.
 To check the connection you can go to your browser and write "localhost:3000". If there is no problem, you should see the welcome screen.
 
 ### 5. .env file 
-As last final step, you should set your .env file for MongoDB connection. In the .env file you will define following informations:
-MONGO_URI= <your mongo uri>
+As last final step, you should set your .env file for MongoDB connection. In the .env file you will define following informations:<br>
+MONGO_URI= < your mongo uri >
 
 
 
