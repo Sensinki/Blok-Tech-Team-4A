@@ -15,6 +15,3 @@ module.exports = {
   match,
   matchPost
 };
-module.exports = {
-  match
-};

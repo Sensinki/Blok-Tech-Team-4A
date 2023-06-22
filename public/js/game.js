@@ -109,3 +109,4 @@ document.addEventListener("DOMContentLoaded", () => {
     })      .then(() => console.log("ok"))
       .catch(() => console.log("failed"));
   });
+});
