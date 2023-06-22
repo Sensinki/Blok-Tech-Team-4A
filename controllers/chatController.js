@@ -9,6 +9,7 @@ const io = require("socket.io")(http);
 const { getUnreadMessageCount } = require("../helpers/chatHelper");
 const Message = require("../models/messageModel");
 
+// Define an array of games
 const games = [
     {
         name: "Valorant",
@@ -61,8 +62,10 @@ const games = [
         liked: false,
     },
 ];
+// Filter the liked games from the array
 const likedGames = games.filter((game) => game.liked);
 
+// Create an array of chats based on the liked games
 const chats = likedGames.map((game) => {
     return {
         chatName: game.name,
@@ -74,10 +77,12 @@ const chats = likedGames.map((game) => {
 
 module.exports = chats;
 
+// Controller function for rendering the home page
 const home = async (req, res) => {
     const username = req.session.username || "";
     console.log("Huidige gebruikersnaam:", username);
 
+    // Update the new message count for each chat
     const updatedChats = await Promise.all(
         chats.map(async (chat) => {
             const unreadMessageCount = await getUnreadMessageCount(chat.chatName, username);
@@ -92,13 +97,16 @@ const home = async (req, res) => {
     });
 };
 
+// Controller function for rendering a chat page
 const getChat = async (req, res) => {
     const username = req.session.username || "";
     const chatName = req.params.chatName;
     const chat = chats.find((c) => c.chatName === chatName);
 
+    // Update the read status of unread messages
     await Message.updateMany({ chatName, sender: { $ne: username }, read: false }, { $set: { read: true } });
 
+    // Update the new message count for the current chat
     const updatedChats = chats.map((chat) => {
         if (chat.chatName === chatName) {
             return { ...chat, newMessageCount: 0 };
@@ -116,6 +124,7 @@ const getChat = async (req, res) => {
     });
 };
 
+// Controller function for handling the post request to send a message
 const postMessage = async (req, res) => {
     const chatName = req.params.chatName;
     const sender = req.session.username;
@@ -129,6 +138,7 @@ const postMessage = async (req, res) => {
     });
     await message.save();
 
+    // Emit the message event to the chat room
     io.to(chatName).emit("message", {
         chatName,
         sender,

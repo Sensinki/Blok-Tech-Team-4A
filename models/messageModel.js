@@ -1,6 +1,9 @@
 /* eslint-disable indent */
+
+// Import the required dependencies
 const mongoose = require("mongoose");
 
+// Define a message schema using Mongoose
 const messageSchema = new mongoose.Schema({
     chatName: String,
     sender: String,

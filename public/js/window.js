@@ -1,12 +1,11 @@
-// Voeg een eventlistener toe aan de link
-document
-  .getElementById("delete-account-link")
-  .addEventListener("click", function (event) {
+/* eslint-disable indent */
+// Add an event listener to the link
+document.getElementById("delete-account-link").addEventListener("click", function (event) {
     event.preventDefault();
 
-    // Vraag om bevestiging met een alertvenster
+    // Ask for confirmation with an alert window
     if (confirm("Are you sure you want to delete your account?")) {
-      // Als de gebruiker bevestigt, navigeer naar de delete-account-pagina
-      window.location.href = "/delete-account";
+        // If the user confirms, navigate to the delete-account page
+        window.location.href = "/delete-account";
     }
-  });
+});

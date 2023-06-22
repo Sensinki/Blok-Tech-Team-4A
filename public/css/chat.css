@@ -1,8 +1,36 @@
+/* GENERAL */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+button, 
+a {
+  cursor: pointer;
+}
+
+/* CUSTOM PROPERITIES */
+:root {
+  --body: var(--little-white);
+  --green: #74a847;
+  --little-white: #fff7df;
+  --white: #ededed;
+  --grey-white: #ccc;
+  --black: #140702;
+  --chat-message: #a86246;
+  --grey: #333;
+  --err: #db5858d2;
+  --err-background: #182c1d;
+  --red: red;
+  --whityy: #f3f3f3;
+}
+
+/* CHAT */
 .inchat {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #140702;
+    background-color: var(--black);
     position: relative;
     z-index: 10;
 }
@@ -12,7 +40,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #fff7df;
+    background-color: var(--little-white);
     position: fixed;
     top: 0;
     width: 100%;
@@ -40,7 +68,7 @@
 
 .inchat .profile p {
     margin-left: 10px;
-    color: red;
+    color: var(--red);
 }
 
 .inchat .status {
@@ -61,7 +89,7 @@
 .inchat .profile-name {
     font-size: 20px;
     font-weight: bold;
-    color: #333;
+    color: var(--grey);
 }
 
 .chat-box {
@@ -80,20 +108,20 @@
 
 .username {
     font-size: 0.9em;
-    color: #fff7df;
+    color: var(--little-white);
     align-self: start;
     font-weight: bolder;
 }
 
 .username-me {
     font-size: 0.9em;
-    color: #fff7df;
+    color: var(--little-white);
     align-self: flex-end;
     font-weight: bolder;
 }
 
 .chat-bubble {
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 10px;
@@ -103,13 +131,13 @@
 
 .inchat .left-bubble {
     align-self: flex-start;
-    background-color: #fff7df;
+    background-color: var(--little-white);
 }
 
 .inchat .right-bubble {
     align-self: flex-end;
-    background-color: rgb(168, 98, 70);
-    color: #fff7df;
+    background-color: var(--chat-message);
+    color: var(--little-white);
 }
 
 .inchat .input-bar {
@@ -117,14 +145,14 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--grey-white);
     width: 100%;
     height: 5em;
     position: fixed;
     bottom: 0;
     left: 0;
     z-index: 20;
-    background-color: #fff7df;
+    background-color: var(--little-white);
     box-sizing: border-box;
 }
 
@@ -148,8 +176,8 @@
 
 
 .inchat .send-button {
-    background-color: #140702;
-    color: #fff;
+    background-color: var(--black);
+    color: var(--white);
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
@@ -193,10 +221,10 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: #74a847;
+    background-color: var(--green);
     position: relative;
     z-index: 2;
-    outline: 3px solid #fff7df;
+    outline: 3px solid var(--little-white);
     opacity: 0.8;
 }
 
@@ -204,14 +232,14 @@
     position: absolute;
     left: 20px;
     cursor: pointer;
-    color: #a86246;
+    color: var(--chat-message);
 }
 
 /* GIF STYLING */
 
 .gif-bubble {
     display: inline-block;
-    background-color: #f3f3f3;
+    background-color: var(--whityy);
     border-radius: 20px;
     padding: 10px;
     margin-top: 5px;
@@ -230,8 +258,8 @@
 
 .gif-menu {
     display: none;
-    border: 1px solid #ccc;
-    background-color: #fff;
+    border: 1px solid var(--grey-white);
+    background-color: white;
     padding: 10px;
     position: absolute;
     top: 30px;
@@ -274,8 +302,8 @@
 }
 
 .gif-button {
-    background-color: #140702;
-    color: #fff;
+    background-color: var(--black);
+    color: var(--white);
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
@@ -285,7 +313,7 @@
 }
 
 #searchInput {
-    background-color: #fff7df;
+    background-color: var(--white);
     height: 4em;
     border-radius: 10px;
     border: none;
@@ -294,8 +322,8 @@
 }
 
 .searchGif {
-    background-color: #fff7df;
-    color: #140702;
+    background-color: var(--white);
+    color: var(--black);
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
@@ -322,7 +350,7 @@ nav {
 }
 
 nav button {
-    background-color: #fff;
+    background-color: var(--white);
     color: #140702;
     border: none;
     padding: 10px 20px;
@@ -334,6 +362,6 @@ nav button {
 
 .error-message {
     font-size: 1.2em;
-    color: #fff;
+    color: var(--white);
     transform: translate(0.3em, -7em);
 }

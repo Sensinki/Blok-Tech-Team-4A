@@ -1,6 +1,9 @@
 /* eslint-disable indent */
+
+// Import the required dependencies
 const mongoose = require("mongoose");
 
+// Define a game schema using Mongoose
 const gameSchema = new mongoose.Schema({
     name: String,
     image: String,
