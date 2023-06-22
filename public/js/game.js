@@ -101,7 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
       gameName: currentGame.name,
       gameImage: currentGame.image,
       gameCode: currentGame.game    };
-    // AJAX request    fetch("/match", {
+    // AJAX request    //
+    fetch("/match", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"      },      body: JSON.stringify(requestBody)
