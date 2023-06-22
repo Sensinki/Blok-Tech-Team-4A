@@ -166,6 +166,42 @@ a {
   color: var(--chat-message);
 }
 
+/* css for the liked home page */
+.list{
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid black;
+}
+
+.listLiked{
+  display: flex;
+  flex-direction: column;
+}
+
+.heart-checkbox {
+  display: none;
+}
+
+.heart-label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.heart-label::before {
+  content: "\2665";
+  top: 0;
+  left: 0;
+  font-size: 3em;
+  line-height: 1;
+  color: #ccc;
+}
+
+.heart-checkbox:checked + .heart-label::before {
+  color: red;
+}
+
+
 
 /* INCHAT AKA CHAT.HANDLEBARS */
 

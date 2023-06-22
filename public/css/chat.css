@@ -26,6 +26,26 @@ a {
 }
 
 /* CHAT */
+
+/* header */
+nav {
+    position: fixed;
+    z-index: 999;
+    top: 1em;
+    right: 1em;
+}
+
+nav button {
+    background-color: var(--white);
+    color: #140702;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* body */
 .inchat {
     margin: 0;
     padding: 0;
@@ -340,23 +360,6 @@ a {
 .searchGif.active {
     transform: translate(1em, -16em);
     transition: 0.1s;
-}
-
-nav {
-    position: fixed;
-    z-index: 999;
-    top: 1em;
-    right: 1em;
-}
-
-nav button {
-    background-color: var(--white);
-    color: #140702;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 14px;
-    cursor: pointer;
 }
 
 

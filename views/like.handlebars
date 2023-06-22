@@ -1,12 +1,18 @@
-{{> header }}
-
 <body>
-    <h2>Gelukt!</h2>
-    <section>
-    
-   {{!-- <h1>halloo</h1> --}}
-   <h1>{{likedUserProfile}}</h1>
-
+    <h1>Liked chats</h1>
+    <section class="listLiked">
     </section>
+
+    <section class="list">
+        {{#each games}}
+        <form id="gameForm" action="/like" method="POST" onclick="submitForm()">
+            <input type="checkbox" id="{{this.id}}" class="heart-checkbox" name="game" value="{{this.name}}">
+            <label for="{{this.id}}" class="heart-label">{{this.name}}</label>
+        </form>
+        {{/each}}
+    </section>
+
+    <br>
+    <br>
+    <a href="/">Go back to chats</a>
 </body>
-</html>

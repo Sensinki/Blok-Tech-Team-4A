@@ -6,6 +6,7 @@ const chatController = require("../controllers/chatController");
 const matchController = require("../controllers/matchController");
 const errorController = require("../controllers/errorController");
 const { checkSession } = require("../controllers/sessionControl");
+const likeController = require("../controllers/likeController");
 
 // Account Routes
 
@@ -51,6 +52,14 @@ router.get("/delete-account", checkSession, (req, res) => {
 router.get("/match", checkSession, (req, res) => {
     console.log("inside match");
     matchController.match(req, res);
+});
+
+// Like Routes
+
+// Route for displaying the match page
+router.get("/like", checkSession, (req, res) => {
+    console.log("inside like");
+    likeController.getLikePage(req, res);
 });
 
 // Chat Routes

@@ -1,5 +1,5 @@
-<!-- login.handlebars -->
 <html class="inlog">
+
 <body class="{{#if bodyClass}}{{bodyClass}}{{/if}}">
     <h1>Login Page</h1>
     {{#if error}}
@@ -15,18 +15,10 @@
         <input type="password" id="password" name="password" required />
 
         <input type="submit" value="Login" />
-        <div class="g-recaptcha" data-sitekey="6LcnlJQmAAAAAKACWCv7uH09gDWbBsTbgjaKs9uz"></div>
-        <button class="g-recaptcha" data-sitekey="6LcnlJQmAAAAAKACWCv7uH09gDWbBsTbgjaKs9uz" data-callback='onSubmit'
-            data-action='submit'>Submit</button>
     </form>
 
     <a href="/signup">I don't have an account</a>
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcnlJQmAAAAAKACWCv7uH09gDWbBsTbgjaKs9uz"></script>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script>
-        function onSubmit(token) {
-            document.getElementById("login-form").submit();
-        }
-    </script>
 </body>
+
 </html>
+

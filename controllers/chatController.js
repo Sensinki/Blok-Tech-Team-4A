@@ -13,52 +13,52 @@ const Message = require("../models/messageModel");
 const games = [
     {
         name: "Valorant",
-        image: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Flag_of_chinese-speaking_countries_and_territories.svg",
+        image: "static/images/valorant.jpg",
         liked: false,
     },
     {
         name: "Minecraft",
-        image: "https://plainlanguagenetwork.org/wp-content/uploads/2017/05/banderashispanas-200.jpg",
+        image: "static/images/minecraft.jpeg",
         liked: true,
     },
     {
         name: "Super Mario Bros",
-        image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Flag_of_Greece_and_Cyprus.svg",
+        image: "static/images/mario.jpg",
         liked: true,
     },
     {
         name: "League of Legends",
-        image: "https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg",
-        liked: false,
+        image: "static/images/lol.jpeg",
+        liked: true,
     },
     {
         name: "Call of Duty",
-        image: "https://cdn-eu.purposegames.com/images/game/bg/96/ZYdKhTOijhE.png?s=1400",
-        liked: false,
+        image: "static/images/cod.jpeg",
+        liked: true,
     },
     {
-        name: "PlayerUnknown's Battlegrounds",
-        image: "https://plainlanguagenetwork.org/wp-content/uploads/2017/07/Portuguese_Speaking_Country_Flags.png",
+        name: "PUBG",
+        image: "static/images/pubg.jpeg",
         liked: false,
     },
     {
         name: "Overwatch 2",
-        image: "https://upload.wikimedia.org/wikipedia/commons/9/91/Flag_of_Bhutan.svg",
+        image: "static/images/overwatch.jpeg",
         liked: false,
     },
     {
-        name: "Counter-Strike: Global Offensive",
-        image: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
+        name: "Counter-Strike",
+        image: "static/images/csgo.webp",
         liked: false,
     },
     {
         name: "Rocket League",
-        image: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
+        image: "static/images/rocket.webp",
         liked: false,
     },
     {
         name: "Roblox",
-        image: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
+        image: "static/images/roblox.jpeg",
         liked: false,
     },
 ];

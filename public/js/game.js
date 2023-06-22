@@ -5,7 +5,7 @@
 const games = [
     {
         name: "Valorant",
-        image: "../static/images/valorant.jpeg",
+        image: "static/images/valorant.jpg",
         game: "VAL",
     },
     {
@@ -15,7 +15,7 @@ const games = [
     },
     {
         name: "Super Mario Bros",
-        image: "static/images/lol.jpeg",
+        image: "static/images/mario.jpg",
         game: "SMB",
     },
     {
@@ -25,32 +25,32 @@ const games = [
     },
     {
         name: "Call of Duty",
-        image: "static/images/lol.jpeg",
+        image: "static/images/cod.jpeg",
         game: "COD",
     },
     {
-        name: "PlayerUnknown's Battlegrounds",
-        image: "static/images/lol.jpeg",
+        name: "PUBG",
+        image: "static/images/pubg.jpeg",
         game: "PUBG",
     },
     {
         name: "Overwatch 2",
-        image: "static/images/lol.jpeg",
+        image: "static/images/overwatch.jpeg",
         game: "OW2",
     },
     {
-        name: "Counter-Strike: Global Offensive",
-        image: "static/images/lol.jpeg",
+        name: "Counter-Strike",
+        image: "static/images/csgo.webp",
         game: "CSGO",
     },
     {
         name: "Rocket League",
-        image: "static/images/lol.jpeg",
+        image: "static/images/rocket.webp",
         game: "RL",
     },
     {
         name: "Roblox",
-        image: "static/images/lol.jpeg",
+        image: "static/images/roblox.jpeg",
         game: "Roblox",
     },
 ];
