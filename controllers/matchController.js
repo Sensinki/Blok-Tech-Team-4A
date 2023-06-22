@@ -1,7 +1,8 @@
+/* eslint-disable indent */
 const match = (req, res) => {
-  res.render("match");
+    res.render("match");
 };
 
 module.exports = {
-  match,
+    match,
 };

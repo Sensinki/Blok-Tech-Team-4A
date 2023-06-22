@@ -1,10 +1,26 @@
+/* CUSTOM PROPERITIES */
+:root {
+  /* colors */
+  --body: var(--little-white);
+  --green: #74a847;
+  --little-white: #fff7df;
+  --white: #ededed;
+  --grey-white: #ccc;
+  --black: #140702;
+  --chat-message: #a86246;
+  --grey: #333;
+  --err: #db5858d2;
+  --err-background: #182c1d;
+  --heart: #9cb4ec;
+}
+
 body {
     height: 100%;
     width: 100%;
-    background-color: whitesmoke;
+    background-color: var(--little-white);
     padding: 0;
     margin: 0;
-    background-image: linear-gradient(#9cdcec,#ffffff);
+    background-image: linear-gradient(var(--chat-message),var(--little-white));
     background-repeat: no-repeat;
     min-height: 100vh;
 }
@@ -16,20 +32,23 @@ section {
     justify-content: center;
 }
 
-h1 {
-    color: red;
+
+h2 {
+    text-align: center;
+    color: var(--little-white);
+    font-size: 2rem;
+    padding: 1rem;
 }
 
-h2,
 h3 {
     text-align: center;
-    color: #9cb4ec;
+    color: var(--chat-message);
     font-size: 2rem;
-    margin: 1rem;
+    padding: 1rem;
 }
 
 #userLike {
-    background-color: whitesmoke;
+    background-color: var(--little-white);
     width: 100%;
     height: 76vh;
     padding: 0.5rem;
@@ -54,7 +73,7 @@ img {
 
 .DisLikeButton {
     background-color: transparent;
-    color: white;
+    color: var(--white);
     border-radius: 50%;
     display: inline-block;
     text-align: center;
@@ -68,8 +87,8 @@ img {
 }
 
 .LikeButton {
-    background-color: #9cb4ec;
-    color: white;
+    background-color: var(--heart);
+    color: var(--white);
     border-radius: 50%;
     display: inline-block;
     text-align: center;
@@ -78,13 +97,12 @@ img {
     line-height: 52px;
     text-decoration: none;
     border: none;
-    float: right;
     margin: 1rem 0rem;
     margin-right: 5rem;
 }
 
 .userimg {
-    background-color: #9cb4ec;
+    background-color: var(--heart);
     background-image: url("/static/images/valorant.jpeg");
     border-radius: 10px;
     background-repeat: no-repeat;
@@ -96,6 +114,8 @@ img {
     background-image: url(/static/images/brokeheart.svg);
     background-repeat: no-repeat;
     height: 100%;
+    height: 50px;
+    width: 50px;
     background-size: cover;
     background-position: 50%;
 }

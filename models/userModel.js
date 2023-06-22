@@ -2,10 +2,9 @@
 const mongoose = require("mongoose");
 
 const GameSchema = new mongoose.Schema({
-    liked: Boolean,
-    gameName: String,
-    gameImage: String,
-    gameCode: String,
+    name: String,
+    image: String,
+    game: String,
 });
 
 const userSchema = new mongoose.Schema({
