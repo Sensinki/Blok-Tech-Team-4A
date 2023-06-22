@@ -1,11 +1,11 @@
-const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
+const bcrypt = require("bcrypt");
 
-function renderLoginPage(req, res) {
-  res.render("login", { title: "login", bodyClass: "inlogbody" });
-}
+const getLoginPage = (req, res) => {
+  return res.render("login", { title: "login", bodyClass: "inlogbody" });
+};
 
-async function handleLogin(req, res) {
+const login = async (req, res) => {
   const { username, password } = req.body;
 
   const user = await User.findOne({ username });
@@ -21,13 +21,13 @@ async function handleLogin(req, res) {
 
   const loggedInUrl = "/match";
   return res.redirect(loggedInUrl);
-}
+};
 
-function renderSignupPage(req, res) {
-  res.render("signup", { title: "Signup", bodyClass: "signup-body" });
-}
+const getSignupPage = (req, res) => {
+  return res.render("signup", { title: "Signup", bodyClass: "signup-body" });
+};
 
-async function handleSignup(req, res) {
+const signup = async (req, res) => {
   const { username, password, email } = req.body;
 
   const existingUser = await User.findOne({ email });
@@ -51,18 +51,18 @@ async function handleSignup(req, res) {
 
   const loggedInUrl = "/match";
   return res.redirect(loggedInUrl);
-}
+};
 
-function handleLogout(req, res) {
+const logout = (req, res) => {
   req.session.destroy(function (err) {
     if (err) {
       console.log(err);
     }
-    res.redirect("/login");
+    return res.redirect("/login");
   });
-}
+};
 
-async function handleDeleteAccount(req, res) {
+const deleteAccount = async (req, res) => {
   const { username } = req.session;
 
   await User.deleteOne({ username });
@@ -71,15 +71,15 @@ async function handleDeleteAccount(req, res) {
     if (err) {
       console.log(err);
     }
-    res.redirect("/login");
+    return res.redirect("/login");
   });
-}
+};
 
 module.exports = {
-  renderLoginPage,
-  handleLogin,
-  renderSignupPage,
-  handleSignup,
-  handleLogout,
-  handleDeleteAccount,
+  getLoginPage,
+  login,
+  getSignupPage,
+  signup,
+  logout,
+  deleteAccount,
 };

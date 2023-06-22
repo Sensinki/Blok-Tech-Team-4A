@@ -1,32 +1,68 @@
 const express = require("express");
-const app = express();
-const { checkSession } = require("../middlewares/autentication");
-
+const router = express.Router();
 const accountController = require("../controllers/accountController");
-
-app.get("/login", accountController.renderLoginPage);
-app.post("/login", accountController.handleLogin);
-app.get("/signup", accountController.renderSignupPage);
-app.post("/signup", accountController.handleSignup);
-app.get("/logout", accountController.handleLogout);
-app.get("/delete-account", accountController.handleDeleteAccount);
-
-const matchController = require("../controllers/matchController");
-
-app.get("/match", checkSession, matchController.renderMatchPage);
-app.post("/match", checkSession, matchController.handleMatchPost);
-
-
 const chatController = require("../controllers/chatController");
-
-app.get("/", checkSession, chatController.renderHomePage);
-app.get("/chat/:chatName", checkSession, chatController.renderChatPage);
-app.post("/chat/:chatName/message", checkSession, chatController.handleMessagePost);
-
-
+const matchController = require("../controllers/matchController");
 const errorController = require("../controllers/errorController");
+const { checkSession } = require("../controllers/sessionControl");
 
-app.use(errorController.handle404Error);
+// Account Routes
+router.get("/login", (req, res) => {
+  console.log("inside login");
+  accountController.getLoginPage(req, res);
+});
 
+router.post("/login", (req, res) => {
+  console.log("inside login");
+  accountController.login(req, res);
+});
 
-module.exports = app;
+router.get("/signup", (req, res) => {
+  console.log("inside signup");
+  accountController.getSignupPage(req, res);
+});
+
+router.post("/signup", (req, res) => {
+  console.log("inside signup");
+  accountController.signup(req, res);
+});
+
+router.get("/logout", checkSession, (req, res) => {
+  console.log("inside logout");
+  accountController.logout(req, res);
+});
+
+router.get("/delete-account",checkSession, (req, res) => {
+  console.log("inside delete account");
+  accountController.deleteAccount(req, res);
+});
+
+// Match Routes
+router.get("/match", checkSession,(req, res) => {
+  console.log("inside match");
+  matchController.match(req, res);
+});
+
+// Chat Routes
+router.get("/", checkSession,(req, res) => {
+  console.log("inside home");
+  chatController.home(req, res);
+});
+
+router.get("/chat/:chatName", checkSession,(req, res) => {
+  console.log("inside getChat");
+  chatController.getChat(req, res);
+});
+
+router.post("/chat/:chatName/message",checkSession, (req, res) => {
+  console.log("inside postMessage");
+  chatController.postMessage(req, res);
+});
+
+// Error Handling
+router.use((req, res) => {
+  console.log("inside handle404");
+  errorController.handle404Error(req, res);
+});
+
+module.exports = router;

@@ -1,84 +1,90 @@
-const chats = require("../public/js/home");
-const Message = require("../models/messageModel");
+const xss = require("xss");
 const express = require("express");
 const app = express();
+
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
-const mongoose = require("mongoose");
-const { MONGO_URI } = process.env;
-const xss = require("xss");
+const { getUnreadMessageCount } = require("../helpers/chatHelper");
+const Message = require("../models/messageModel");
 
-async function getUnreadMessageCount(chatName, loggedInUser) {
-  const unreadMessages = await Message.countDocuments({
-    chatName,
-    sender: { $ne: loggedInUser },
-    read: false,
-  });
-  return unreadMessages;
-}
 
-async function run() {
-  try {
-    await mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+const games = [
+  {
+    name: "Valorant",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/d/dd/Flag_of_chinese-speaking_countries_and_territories.svg",
+    liked: true,
+  },
+  {
+    name: "Minecraft",
+    image:
+      "https://plainlanguagenetwork.org/wp-content/uploads/2017/05/banderashispanas-200.jpg",
+    liked: true,
+  },
+  {
+    name: "Super Mario Bros",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/d/d2/Flag_of_Greece_and_Cyprus.svg",
+    liked: true,
+  },
+  {
+    name: "League of Legends",
+    image: "https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg",
+    liked: false,
+  },
+  {
+    name: "Call of Duty",
+    image:
+      "https://cdn-eu.purposegames.com/images/game/bg/96/ZYdKhTOijhE.png?s=1400",
+    liked: false,
+  },
+  {
+    name: "PlayerUnknown's Battlegrounds",
+    image:
+      "https://plainlanguagenetwork.org/wp-content/uploads/2017/07/Portuguese_Speaking_Country_Flags.png",
+    liked: false,
+  },
+  {
+    name: "Overwatch 2",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/9/91/Flag_of_Bhutan.svg",
+    liked: false,
+  },
+  {
+    name: "Counter-Strike: Global Offensive",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
+    liked: false,
+  },
+  {
+    name: "Rocket League",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
+    liked: false,
+  },
+  {
+    name: "Roblox",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/d/d6/Russian_language_flag.svg",
+    liked: false,
+  },
+];
+const likedGames = games.filter((game) => game.liked);
 
-    console.log("MONGODB IS HIER YUH :)");
+const chats = likedGames.map((game) => {
+  return {
+    chatName: game.name,
+    profilePicture: game.image,
+    newMessageCount: 0,
+    lastMessage: "",
+  };
+});
 
-    io.use((socket, next) => {
-      sessionMiddleware(socket.request, {}, next);
-    });
+module.exports = chats;
 
-    io.on("connection", async (socket) => {
-      const chatName = socket.handshake.headers.referer.split("/").pop();
-      console.log(
-        `User ${socket.request.session.username} connected in ${chatName}`
-      );
-      socket.join(chatName);
 
-      if (socket.request.session && socket.request.session.username) {
-        const loggedInUser = socket.request.session.username;
-        console.log(`User ${loggedInUser} is ingelogd`);
-        io.to(socket.id).emit("loggedInUser", loggedInUser);
-      } else {
-        console.log("Er is niet ingelogd");
-      }
-
-      socket.on("disconnect", () => {
-        console.log(
-          `User ${socket.request.session.username} disconnected from ${chatName}`
-        );
-      });
-      const chatHistory = await Message.find({ chatName }).exec();
-
-      socket.emit("chatHistory", chatHistory);
-
-      socket.on("message", async (msg) => {
-        const sender = socket.request.session.username;
-        const timestamp = Date.now();
-        const message = new Message({
-          ...msg,
-          chatName,
-          sender,
-          timestamp,
-          read: false,
-        });
-        await message.save();
-
-        io.to(chatName).emit("message", { ...msg, sender, timestamp });
-        console.log(`Message toegevoegd aan MongoDB: ${msg.content}`);
-      });
-    });
-  } catch (err) {
-    console.log(err);
-  } finally {
-    // await client.close();
-  }
-}
-
-async function renderHomePage(req, res) {
+const home = async (req, res) => {
   const username = req.session.username || "";
   console.log("Huidige gebruikersnaam:", username);
 
@@ -92,14 +98,14 @@ async function renderHomePage(req, res) {
     })
   );
 
-  res.render("home", {
+  return res.render("home", {
     username: username,
     chats: updatedChats,
     title: "Homepage",
   });
-}
+};
 
-async function renderChatPage(req, res) {
+const getChat = async (req, res) => {
   const username = req.session.username || "";
   const chatName = req.params.chatName;
   const chat = chats.find((c) => c.chatName === chatName);
@@ -117,16 +123,16 @@ async function renderChatPage(req, res) {
     }
   });
 
-  res.render("chat", {
+  return res.render("chat", {
     messages: [],
     username: username,
     chatName: chatName,
     chats: updatedChats,
     profilePicture: chat ? chat.profilePicture : "",
   });
-}
+};
 
-async function handleMessagePost(req, res) {
+const postMessage = async (req, res) => {
   const chatName = req.params.chatName;
   const sender = req.session.username;
   const messageContent = xss(req.body.message);
@@ -145,12 +151,11 @@ async function handleMessagePost(req, res) {
     content: messageContent,
   });
 
-  res.redirect(`/chat/${chatName}`);
-}
+  return res.redirect(`/chat/${chatName}`);
+};
 
 module.exports = {
-  renderHomePage,
-  renderChatPage,
-  handleMessagePost,
-  getUnreadMessageCount,
+  home: home,
+  getChat: getChat,
+  postMessage: postMessage,
 };
