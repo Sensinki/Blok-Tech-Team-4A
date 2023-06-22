@@ -1,7 +1,17 @@
 {{!-- DIVJES ZIJN GEBRUIKT VOOR VORMGEVING!!! --}}
 
 <body>
-    {{>header-hp}}
+    <header>
+        <h2 class="header-left">
+            Chats
+        </h2>
+        <section class="header-right">
+            <button><a href="/logout" id="logout-account-link">Log out</a></button>
+            <button><a href="/delete-account" id="delete-account-link">Delete account</a></button>
+            <img src="https://e7.pngegg.com/pngimages/273/380/png-clipart-round-world-flag-flags-of-the-world-globe-world-flag-country-miscellaneous-flag.png"
+                alt="Profile Picture" />
+        </section>
+    </header>
     <div class="round-top"></div>
     {{#each chats}}
     <a class="chatName" href="/chat/{{this.chatName}}">
