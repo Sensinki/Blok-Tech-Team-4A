@@ -1,20 +1,20 @@
 const User = require("../models/userModel");
 const match = (req, res) => {
-    res.render("match");
+  res.render("match");
 };
 const matchPost = async (req, res) => {
-    const user = await User.findOne({username: req.session.username});
-    user
-        .likedGames
-        .push(req.body);
-    await user.save();
-    res.sendStatus(200);
+  const user = await User.findOne({username: req.session.username});
+  user
+    .likedGames
+    .push(req.body);
+  await user.save();
+  res.sendStatus(200);
 };
 
 module.exports = {
-    match,
-    matchPost
+  match,
+  matchPost
 };
 module.exports = {
-    match
+  match
 };
