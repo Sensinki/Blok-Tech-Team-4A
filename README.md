@@ -40,16 +40,8 @@ To check the connection you can go to your browser and write "localhost:3000". I
 
 ### 5. .env file 
 As last final step, you should set your .env file for MongoDB connection. In the .env file you will define following informations:
+MONGO_URI= <your mongo uri>
 
-`DB_URI= <your MongoDB URI>`
-
-`DB_USERNAME= <your username>`
-
-`DB_PASSWORD= <your database password>`
-
-`DB_NAME= <your database name>`
-
-`SESSION_SECRET=<your secret password>`
 
 
 
