@@ -1,0 +1,315 @@
+.inchat {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #140702;
+    position: relative;
+    z-index: 10;
+}
+
+.inchat header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff7df;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    height: 8em;
+    border-radius: 0 0 50px 50px;
+}
+
+
+.inchat .profile {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.inchat .profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.inchat .profile p {
+    margin-left: 10px;
+    color: red;
+}
+
+.inchat .status {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+.inchat .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-image: url("profile-pic.png");
+    background-size: cover;
+    margin-right: 10px;
+}
+
+.inchat .profile-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.chat-box {
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    top: 2em;
+    padding-bottom: 8em;
+    margin-top: 8em;
+    z-index: -10;
+    scroll-behavior: smooth;
+}
+
+.username {
+    font-size: 0.9em;
+    color: #fff7df;
+    align-self: start;
+    font-weight: bolder;
+}
+
+.username-me {
+    font-size: 0.9em;
+    color: #fff7df;
+    align-self: flex-end;
+    font-weight: bolder;
+}
+
+.chat-bubble {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+    top: 80px;
+    max-width: 70%;
+}
+
+.inchat .left-bubble {
+    align-self: flex-start;
+    background-color: #fff7df;
+}
+
+.inchat .right-bubble {
+    align-self: flex-end;
+    background-color: rgb(168, 98, 70);
+    color: #fff7df;
+}
+
+.inchat .input-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    height: 5em;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    background-color: #fff7df;
+    box-sizing: border-box;
+}
+
+.inchat form {
+    display: flex;
+    width: 100%;
+}
+
+
+.inchat .input-field {
+    flex: 3;
+    margin: 0 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: transparent;
+    font-size: 16px;
+    outline: none;
+}
+
+
+
+.inchat .send-button {
+    background-color: #140702;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+
+
+.inchat .profile-status-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.inchat .profile-status-container p {
+    color: #140702;
+    font-size: 1em;
+}
+
+.inchat .profile-picture-container {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.inchat .profile-picture-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.inchat .status-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #74a847;
+    position: relative;
+    z-index: 2;
+    outline: 3px solid #fff7df;
+    opacity: 0.8;
+}
+
+.inchat .back {
+    position: absolute;
+    left: 20px;
+    cursor: pointer;
+    color: #a86246;
+}
+
+/* GIF STYLING */
+
+.gif-bubble {
+    display: inline-block;
+    background-color: #f3f3f3;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.gif-bubble img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.sent-gif {
+    cursor: default;
+}
+
+.gif-menu {
+    display: none;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 10px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 200px;
+}
+
+.gifHide {
+    display: none;
+}
+
+.showInput {
+    display: block;
+    position: fixed;
+    bottom: 5em;
+}
+
+
+.gif-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-y: auto;
+    max-height: 300px;
+    position: fixed;
+    bottom: 2em;
+    max-width: 30em;
+}
+
+.gif-container img {
+    width: calc(50% - 5px);
+    height: auto;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    border-radius: 10px;
+}
+
+.gif-container img:nth-child(2n) {
+    margin-right: 0;
+}
+
+.gif-button {
+    background-color: #140702;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+#searchInput {
+    background-color: #fff7df;
+    height: 4em;
+    border-radius: 10px;
+    border: none;
+    width: 54%;
+    transform: translate(1em, -2em);
+}
+
+.searchGif {
+    background-color: #fff7df;
+    color: #140702;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transform: translate(1em, -2em);
+}
+
+#searchInput.active {
+    transform: translate(1em, -19em);
+    transition: 0.1s;
+}
+
+.searchGif.active {
+    transform: translate(1em, -16em);
+    transition: 0.1s;
+}

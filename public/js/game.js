@@ -1,0 +1,110 @@
+
+// game.js
+const games = [
+  {
+    name: "Valorant",
+    image: "../static/images/valorant.jpeg",
+    game: "VAL",
+  },
+  {
+    name: "Minecraft",
+    image: "../static/images/minecraft.jpeg",
+    game: "MC",
+  },
+  {
+    name: "Super Mario Bros",
+    image: "static/images/lol.jpeg",
+    game: "SMB",
+  },
+  {
+    name: "League of Legend",
+    image: "static/images/lol.jpeg",
+    game: "LOL",
+  },
+  {
+    name: "Call of Duty",
+    image: "static/images/lol.jpeg",
+    game: "COD",
+  },
+  {
+    name: "PlayerUnknown's Battlegrounds",
+    image: "static/images/lol.jpeg",
+    game: "PUBG",
+  },
+  {
+    name: "Overwatch 2",
+    image: "static/images/lol.jpeg",
+    game: "OW2",
+  },
+  {
+    name: "Counter-Strike: Global Offensive",
+    image: "static/images/lol.jpeg",
+    game: "CSGO",
+  },
+  {
+    name: "Rocket League",
+    image: "static/images/lol.jpeg",
+    game: "RL",
+  },
+  {
+    name: "Roblox",
+    image: "static/images/lol.jpeg",
+    game: "Roblox",
+  },
+];
+
+
+document
+  .querySelector(".LikeButton")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+  });
+
+let currentGameIndex = 0;
+
+document.addEventListener("DOMContentLoaded", () => {
+  const dislikeButton = document.querySelector(".DisLikeButton");
+  const likeButton = document.querySelector(".LikeButton");
+
+  dislikeButton.addEventListener("click", loadNextGame);
+  likeButton.addEventListener("click", loadNextGame);
+
+  function loadNextGame() {
+    currentGameIndex++;
+    if (currentGameIndex >= games.length) {
+      currentGameIndex = 0;
+      window.location.href = "/";
+      return;
+    }
+
+    console.log("Current Index:", currentGameIndex);
+
+    const currentGame = games[currentGameIndex];
+
+    const gameImage = document.querySelector(".userimg");
+    gameImage.style.backgroundImage = `url(${currentGame.image})`;
+
+    const gameName = document.querySelector("h3");
+    gameName.textContent = currentGame.name;
+
+    const gameGame = document.querySelector("p");
+    gameGame.textContent = currentGame.game;
+  }
+
+  likeButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    let liked = true;
+    const currentGame = games[currentGameIndex];
+
+    const requestBody = {
+      liked: liked,
+      gameName: currentGame.name,
+      gameImage: currentGame.image,
+      gameCode: currentGame.game    };
+    // AJAX request    fetch("/match", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"      },      body: JSON.stringify(requestBody)
+    })      .then(() => console.log("ok"))
+      .catch(() => console.log("failed"));
+  });

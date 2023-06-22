@@ -1,0 +1,44 @@
+{{!-- DIVJES ZIJN GEBRUIKT VOOR VORMGEVING!!! --}}
+
+<body>
+    <header>
+        <h2 class="header-left">
+            Chats
+        </h2>
+        <section class="header-right">
+            <button><a href="/logout" id="logout-account-link">Log out</a></button>
+            <button><a href="/delete-account" id="delete-account-link">Delete account</a></button>
+            <img src="https://e7.pngegg.com/pngimages/273/380/png-clipart-round-world-flag-flags-of-the-world-globe-world-flag-country-miscellaneous-flag.png"
+                alt="Profile Picture" />
+        </section>
+    </header>
+    <div class="round-top"></div>
+    {{#each chats}}
+    <a class="chatName" href="/chat/{{this.chatName}}">
+        <section class="chat-container">
+            <div class="chat">
+                <section class="chat-left">
+                    <div class="profile-status-container">
+                        <section class="profile-picture-container">
+                            <img src="{{this.profilePicture}}" alt="Profile Picture" />
+                        </section>
+                    </div>
+                </section>
+                <section class="chat-right">
+                    <section class="chat-header">
+                        <div class="chat-name">{{this.chatName}}</div>
+                        <div class="new-message-indicator">{{this.newMessageCount}}</div>
+                    </section>
+                    <div class="chat-last-message">{{this.lastMessage}}</div>
+                </section>
+            </div>
+        </section>
+    </a>
+    {{/each}}
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../js/home.min.js"></script>
+    <script src="../js/window.min.js"></script>
+ 
+</body>
+
+</html>

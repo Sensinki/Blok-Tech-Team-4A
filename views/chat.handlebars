@@ -1,0 +1,55 @@
+{{! chat.handlebars }}
+<html>
+    <head>
+      <link rel="stylesheet" href="/css/chat.min.css" />
+    </head>
+<body class="inchat">
+  <header>
+    <div class="profile-status-container">
+      <link rel="stylesheet" href="/css/chat.min.css" />
+      <a href="/" class="back">← Back</a>
+      <div class="profile-picture-container">
+        <img src="{{profilePicture}}" alt="Profile Picture" />
+      </div>
+      <p>{{chatName}}</p>
+    </div>
+  </header>
+  <div class=round-top></div>
+
+
+  <section class="fallback-message">
+    <h2>JavaScript Disabled Are you a fan of living in the Stone Age? Go ahead, enable JavaScript, and join us in the
+      modern era!</h2>
+    <img src="https://i.kym-cdn.com/entries/icons/mobile/000/018/259/55181940.jpg">
+  </section>
+
+  <section class="chat-box">
+    {{#each messages}}
+    {{#if (isRightBubble this)}}
+    <div class="chat-bubble right-bubble">{{this.content}}</div>
+    {{else}}
+    <div class="chat-bubble left-bubble">{{this.content}}</div>
+    {{/if}}
+    {{/each}}
+  </section>
+  
+    <section class="gifHide">
+      <input type="text" id="searchInput" placeholder="GIF" autocomplete="off"/>
+  <button class="searchGif">Search</button>
+      <div id="gifContainer" class="gif-container"></div>
+    </section>
+
+  <div class="input-bar">
+    <button class="gif-button">GIF</button>
+    <form id="input-form" action="/chat/{{chatName}}/message" method="POST">
+      <input type="text" class="input-field" id="message-input" placeholder="Type a message..."
+        aria-label="Type hier uw bericht" name="message" autocomplete="off" />
+
+      <button class="send-button" type="submit">Send</button>
+    </form>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="../js/chat.min.js"></script>
+</body>
+
+</html>
