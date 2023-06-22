@@ -9,6 +9,8 @@ const gifButton = document.querySelector(".gif-button");
 const gifHide = document.querySelector(".gifHide");
 const searchInput = document.getElementById("searchInput");
 const form = document.getElementById("input-form");
+const errorMessage = document.querySelector(".error-message");
+errorMessage.style.display = "none";
 
 // De "socket" wordt geïnitialiseerd en verbonden met de server.
 const socket = io();
@@ -90,10 +92,7 @@ function sendMessage(messageType, gifUrl = null) {
 
 // Functie om een bericht weer te geven in de chatbox.
 function displayMessage(message, isSocketMessage = true) {
-  if (
-    isSocketMessage &&
-    (message.content.trim() === "")
-  ) {
+  if (isSocketMessage && message.content.trim() === "") {
     return;
   }
 
@@ -152,7 +151,8 @@ function addUsername(sender) {
 }
 
 // Functie om de timestamp te formatteren.
-function getFormattedTimestamp(timestamp) {  //https://stackoverflow.com/questions/3552461/how-do-i-format-a-date-in-javascript/46970951#46970951
+function getFormattedTimestamp(timestamp) {
+  //https://stackoverflow.com/questions/3552461/how-do-i-format-a-date-in-javascript/46970951#46970951
   const date = new Date(timestamp);
   const hours = date.getHours().toString().padStart(2, "0");
   const minutes = date.getMinutes().toString().padStart(2, "0");
@@ -175,7 +175,7 @@ function getGifs() {
       const apiKey = data.apiKey;
 
       const searchTerm = document.getElementById("searchInput").value;
-      const apiUrl = //https://developers.giphy.com/docs/api/endpoint
+      const apiUrl =
         "https://api.giphy.com/v1/gifs/search?q=" +
         searchTerm +
         "&api_key=" +
@@ -188,6 +188,13 @@ function getGifs() {
         .then((data) => {
           const gifContainer = document.getElementById("gifContainer");
           gifContainer.innerHTML = ""; // Verwijder eventuele vorige GIFs
+
+          // Controleer of er GIFs zijn gevonden
+          if (data.data.length === 0) {
+            errorMessage.style.display = "block"; // Toon de error message
+          } else {
+            errorMessage.style.display = "none"; // Verberg de error message
+          }
 
           // Itereer door de resultaten en voeg GIFs toe aan de pagina
           for (let i = 0; i < data.data.length; i++) {

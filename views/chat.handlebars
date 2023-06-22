@@ -1,9 +1,15 @@
 {{! chat.handlebars }}
 <html>
-    <head>
-      <link rel="stylesheet" href="/css/chat.min.css" />
-    </head>
+
+<head>
+  <link rel="stylesheet" href="/css/chat.min.css" />
+</head>
+
 <body class="inchat">
+  <nav>
+    <button><a href="/logout" id="logout-account-link">Log out</a></button>
+    <button><a href="/delete-account" id="delete-account-link">Delete account</a></button>
+  </nav>
   <header>
     <div class="profile-status-container">
       <link rel="stylesheet" href="/css/chat.min.css" />
@@ -32,12 +38,14 @@
     {{/if}}
     {{/each}}
   </section>
-  
-    <section class="gifHide">
-      <input type="text" id="searchInput" placeholder="GIF" autocomplete="off"/>
-  <button class="searchGif">Search</button>
-      <div id="gifContainer" class="gif-container"></div>
-    </section>
+
+  <section class="gifHide">
+    <input type="text" id="searchInput" placeholder="GIF" autocomplete="off" />
+    <button class="searchGif">Search</button>
+    <p class="error-message">No GIFs found. Please try a different search term.</p>
+    <div id="gifContainer" class="gif-container">
+    </div>
+  </section>
 
   <div class="input-bar">
     <button class="gif-button">GIF</button>
