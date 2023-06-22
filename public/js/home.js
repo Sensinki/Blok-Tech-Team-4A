@@ -3,19 +3,31 @@ const games = [
     name: "Valorant",
     image:
       "https://upload.wikimedia.org/wikipedia/commons/d/dd/Flag_of_chinese-speaking_countries_and_territories.svg",
+<<<<<<< HEAD
     liked: true,
+=======
+    liked: false,
+>>>>>>> b5d2d4ec040cbfd181d571d465ca6837536492d3
   },
   {
     name: "Minecraft",
     image:
       "https://plainlanguagenetwork.org/wp-content/uploads/2017/05/banderashispanas-200.jpg",
+<<<<<<< HEAD
     liked: true,
+=======
+    liked: false,
+>>>>>>> b5d2d4ec040cbfd181d571d465ca6837536492d3
   },
   {
     name: "Super Mario Bros",
     image:
       "https://upload.wikimedia.org/wikipedia/commons/d/d2/Flag_of_Greece_and_Cyprus.svg",
+<<<<<<< HEAD
     liked: true,
+=======
+    liked: false,
+>>>>>>> b5d2d4ec040cbfd181d571d465ca6837536492d3
   },
   {
     name: "League of Legends",
