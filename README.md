@@ -15,7 +15,7 @@ First of all, this project provides ..... feature within a matching application.
 
 
 # Description :memo:
-
+Game me! is a product that helps gamers find a friend to spend time with while playing online games.
 
 # Installation :package:
 ### 1. Create a folder
@@ -24,7 +24,7 @@ That helps you to place this project in your computer so you can easily navigate
 ### 2. Clone this repository 
 You can clone the application from CLI or install it by downloading the ZIP file. To clone, you can paste the following code into the CLI you are using:
 
-``
+`git clone https://github.com/Sensinki/Blok-Tech-Team-4A.git`
 
 ### 3. Install dependencies
 Now you have all documents but you can not run the code without dependencies. We used npm, you can install npm by copying the following code to the CLI.
@@ -40,8 +40,8 @@ To check the connection you can go to your browser and write "localhost:3000". I
 
 ### 5. .env file 
 As last final step, you should set your .env file for MongoDB connection. In the .env file you will define following informations:<br>
-MONGO_URI= < your mongo uri >
-
+MONGO_URI= <your mongo uri>
+API_KEY=<your api key>
 
 
 
