@@ -11,56 +11,56 @@ const Message = require("../models/messageModel");
 
 // Define an array of games
 const games = [
-  {
-    name: "Valorant",
-    image: "build/images/valorant.jpg",
-    liked: false,
-  },
-  {
-    name: "Minecraft",
-    image: "build/images/minecraft.jpeg",
-    liked: true,
-  },
-  {
-    name: "Super Mario Bros",
-    image: "build/images/mario.jpg",
-    liked: true,
-  },
-  {
-    name: "League of Legends",
-    image: "build/images/lol.jpeg",
-    liked: true,
-  },
-  {
-    name: "Call of Duty",
-    image: "build/images/cod.jpeg",
-    liked: true,
-  },
-  {
-    name: "PUBG",
-    image: "build/images/pubg.jpeg",
-    liked: false,
-  },
-  {
-    name: "Overwatch 2",
-    image: "build/images/overwatch.jpeg",
-    liked: false,
-  },
-  {
-    name: "Counter-Strike",
-    image: "build/images/csgo.webp",
-    liked: false,
-  },
-  {
-    name: "Rocket League",
-    image: "build/images/rocket.webp",
-    liked: false,
-  },
-  {
-    name: "Roblox",
-    image: "build/images/roblox.jpeg",
-    liked: false,
-  },
+    {
+        name: "Valorant",
+        image: "build/images/valorant.jpg",
+        liked: false,
+    },
+    {
+        name: "Minecraft",
+        image: "build/images/minecraft.jpeg",
+        liked: true,
+    },
+    {
+        name: "Super Mario Bros",
+        image: "build/images/mario.jpg",
+        liked: true,
+    },
+    {
+        name: "League of Legends",
+        image: "build/images/lol.jpeg",
+        liked: true,
+    },
+    {
+        name: "Call of Duty",
+        image: "build/images/cod.jpeg",
+        liked: true,
+    },
+    {
+        name: "PUBG",
+        image: "build/images/pubg.jpeg",
+        liked: false,
+    },
+    {
+        name: "Overwatch 2",
+        image: "build/images/overwatch.jpeg",
+        liked: false,
+    },
+    {
+        name: "Counter-Strike",
+        image: "build/images/csgo.webp",
+        liked: false,
+    },
+    {
+        name: "Rocket League",
+        image: "build/images/rocket.webp",
+        liked: false,
+    },
+    {
+        name: "Roblox",
+        image: "build/images/roblox.jpeg",
+        liked: false,
+    },
 ];
 // Filter the liked games from the array
 const likedGames = games.filter((game) => game.liked);
