@@ -3,56 +3,56 @@
 
 // Array of games
 const games = [
-    {
-        name: "Valorant",
-        image: "static/images/valorant.jpg",
-        game: "VAL",
-    },
-    {
-        name: "Minecraft",
-        image: "../static/images/minecraft.jpeg",
-        game: "MC",
-    },
-    {
-        name: "Super Mario Bros",
-        image: "static/images/mario.jpg",
-        game: "SMB",
-    },
-    {
-        name: "League of Legend",
-        image: "static/images/lol.jpeg",
-        game: "LOL",
-    },
-    {
-        name: "Call of Duty",
-        image: "static/images/cod.jpeg",
-        game: "COD",
-    },
-    {
-        name: "PUBG",
-        image: "static/images/pubg.jpeg",
-        game: "PUBG",
-    },
-    {
-        name: "Overwatch 2",
-        image: "static/images/overwatch.jpeg",
-        game: "OW2",
-    },
-    {
-        name: "Counter-Strike",
-        image: "static/images/csgo.webp",
-        game: "CSGO",
-    },
-    {
-        name: "Rocket League",
-        image: "static/images/rocket.webp",
-        game: "RL",
-    },
-    {
-        name: "Roblox",
-        image: "static/images/roblox.jpeg",
-        game: "Roblox",
-    },
+  {
+    name: "Valorant",
+    image: "build/images/valorant.jpg",
+    game: "VAL",
+  },
+  {
+    name: "Minecraft",
+    image: "../build/images/minecraft.jpeg",
+    game: "MC",
+  },
+  {
+    name: "Super Mario Bros",
+    image: "build/images/mario.jpg",
+    game: "SMB",
+  },
+  {
+    name: "League of Legend",
+    image: "build/images/lol.jpeg",
+    game: "LOL",
+  },
+  {
+    name: "Call of Duty",
+    image: "build/images/cod.jpeg",
+    game: "COD",
+  },
+  {
+    name: "PUBG",
+    image: "static/images/pubg.jpeg",
+    game: "PUBG",
+  },
+  {
+    name: "Overwatch 2",
+    image: "static/images/overwatch.jpeg",
+    game: "OW2",
+  },
+  {
+    name: "Counter-Strike",
+    image: "build/images/csgo.webp",
+    game: "CSGO",
+  },
+  {
+    name: "Rocket League",
+    image: "build/images/rocket.webp",
+    game: "RL",
+  },
+  {
+    name: "Roblox",
+    image: "build/images/roblox.jpeg",
+    game: "Roblox",
+  },
 ];
 
 // Event listener for Like button
