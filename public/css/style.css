@@ -494,11 +494,7 @@ a {
   margin: 0;
 
   /* text */
-<<<<<<< HEAD
   font-family: "VT323", monospace;
-=======
-  font-family: 'VT323', monospace;
->>>>>>> b5d2d4ec040cbfd181d571d465ca6837536492d3
 }
 
 .err h1 {
@@ -554,14 +550,11 @@ a {
 
 @media (min-width: 70em) {
 
-<<<<<<< HEAD
   form {
     /* sizes */
     width: 20em;
     height: 90%;
   }
-=======
->>>>>>> b5d2d4ec040cbfd181d571d465ca6837536492d3
 
   /* 404 page */
   .err h1 {
@@ -803,45 +796,4 @@ header {
 .fallback-message {
   animation: fallbackMessageAnimation 0.5s ease-in-out both;
   opacity: 0;
-<<<<<<< HEAD
 }
-=======
-
-}
-
-/* css voor de liked overzicht pagina */
-.list{
-  display: flex;
-  flex-direction: column;
-  border-top: 2px solid black;
-}
-
-.listLiked{
-  display: flex;
-  flex-direction: column;
-}
-
-.heart-checkbox {
-  display: none;
-}
-
-.heart-label {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.heart-label::before {
-  content: "\2665";
-  top: 0;
-  left: 0;
-  font-size: 3em;
-  line-height: 1;
-  color: #ccc;
-}
-
-.heart-checkbox:checked + .heart-label::before {
-  color: red;
-}
-
->>>>>>> b5d2d4ec040cbfd181d571d465ca6837536492d3

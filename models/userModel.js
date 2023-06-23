@@ -17,8 +17,4 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema, console.log("user model loaded"));
 
-<<<<<<< HEAD
 module.exports = User;
-=======
-module.exports = User;
->>>>>>> b5d2d4ec040cbfd181d571d465ca6837536492d3

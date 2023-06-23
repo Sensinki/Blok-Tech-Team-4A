@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {{> header }}
 
 <body>
@@ -11,21 +10,3 @@
     </section>
 </body>
 </html>
-=======
-<body>
-    <h1>Liked chats</h1>
-    <section class="listLiked">
-    </section>
-
-    <section class="list">
-        {{#each games}}
-        <form id="gameForm" action="/like" method="POST" onclick="submitForm()">
-            <input type="checkbox" id="{{this.id}}" class="heart-checkbox" name="game" value="{{this.name}}">
-            <label for="{{this.id}}" class="heart-label">{{this.name}}</label>
-        </form>
-        {{/each}}
-    </section>
-
-      <script src="../js/like.min.js"></script>
-</body>
->>>>>>> b5d2d4ec040cbfd181d571d465ca6837536492d3
