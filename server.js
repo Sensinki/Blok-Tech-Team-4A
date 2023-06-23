@@ -38,7 +38,7 @@ app.set("views", "./views");
 
 // API endpoint to retrieve the API_KEY
 app.get("/api/api-key", (req, res) => {
-    res.json({ apiKey: API_KEY });
+  res.json({ apiKey: API_KEY });
 });
 
 // Parse URL-encoded bodies
@@ -49,10 +49,10 @@ app.use(cookieParser());
 
 // Configure session middleware
 const sessionMiddleware = session({
-    secret: "geefeen10:)bweuSnwedfuwebWfuc`Jkl§wwenfweimfwei1fhwoeifjieowfj",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false },
+  secret: "geefeen10:)bweuSnwedfuwebWfuc`Jkl§wwenfweimfwei1fhwoeifjieowfj",
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false },
 });
 app.use(sessionMiddleware);
 
@@ -64,5 +64,5 @@ socketLogic(io, sessionMiddleware);
 
 // Start the server
 http.listen(PORT, () => {
-    console.log(`Server gestart op poort ${PORT}`);
+  console.log(`Server gestart op poort ${PORT}`);
 });

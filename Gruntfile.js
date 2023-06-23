@@ -1,7 +1,6 @@
 module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-cssmin");
-  grunt.loadNpmTasks("grunt-contrib-imagemin"); 
 
   var JavaScriptObfuscator = require("javascript-obfuscator");
 
@@ -31,19 +30,6 @@ module.exports = function (grunt) {
             src: ["*.css"],
             dest: "build/css",
             ext: ".min.css",
-          },
-        ],
-      },
-    },
-
-    imagemin: {
-      dynamic: {
-        files: [
-          {
-            expand: true,
-            cwd: "static/images",
-            src: ["**/*.{png,jpg,jpeg,svg,webp}"],
-            dest: "build/images",
           },
         ],
       },
@@ -82,13 +68,6 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-cssmin");
-  grunt.loadNpmTasks("grunt-contrib-imagemin");
 
-  grunt.registerTask("default", [
-    "uglify",
-    "cssmin",
-    "obfuscate",
-    "imagemin",
-    "watch",
-  ]); 
+  grunt.registerTask("default", ["uglify", "cssmin", "obfuscate", "watch"]);
 };

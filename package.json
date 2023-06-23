@@ -22,7 +22,6 @@
     "giphy-api": "^2.0.2",
     "grunt-contrib-concat": "^2.1.0",
     "grunt-contrib-cssmin": "^5.0.0",
-    "grunt-contrib-imagemin": "^4.0.0",
     "grunt-contrib-uglify": "^5.2.2",
     "grunt-contrib-watch": "^1.1.0",
     "handlebars": "^4.7.7",

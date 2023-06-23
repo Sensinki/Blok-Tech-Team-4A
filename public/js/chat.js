@@ -190,19 +190,19 @@ function getGifs() {
                         errorMessage.style.display = "none"; // Hide the error message
                     }
 
-                    // Iterate through the results and add GIFs to the page
-for (let i = 0; i < data.data.length; i++) {
-  const gifUrl = data.data[i].images.fixed_width.url;
-  const gifElement = document.createElement("img");
-  gifElement.src = gifUrl;
-  gifElement.setAttribute("data-gif", gifUrl);
-  gifElement.loading = "lazy"; // Voeg het loading attribuut toe
-  gifElement.addEventListener("click", function () {
-    const gifUrl = this.getAttribute("data-gif");
-    sendGifMessage(gifUrl);
-  });
-  gifContainer.appendChild(gifElement);
-}
+                 // Iterate through the results and add GIFs to the page
+                for (let i = 0; i < data.data.length; i++) {
+                const gifUrl = data.data[i].images.fixed_width.url;
+                const gifElement = document.createElement("img");
+                gifElement.src = gifUrl;
+                gifElement.setAttribute("data-gif", gifUrl);
+                gifElement.loading = "lazy"; // Voeg het loading attribuut toe
+                gifElement.addEventListener("click", function () {
+                    const gifUrl = this.getAttribute("data-gif");
+                    sendGifMessage(gifUrl);
+                });
+                gifContainer.appendChild(gifElement);
+                }
                 })
                 .catch((error) => {
                     console.log(error);
