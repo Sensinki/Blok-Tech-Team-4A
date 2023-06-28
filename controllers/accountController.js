@@ -1,34 +1,65 @@
 /* eslint-disable indent */
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const axios = require("axios");
+const { API_CAPTCHA } = process.env;
 
 // Handler for rendering the login page
 const getLoginPage = (req, res) => {
     return res.render("login", { title: "login", bodyClass: "inlogbody" });
 };
 
-// Handler for processing the login request
 const login = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, "g-recaptcha-response": recaptchaResponse } = req.body;
 
-    // Find the user in the database based on the provided username
-    const user = await User.findOne({ username });
+    // Verify reCAPTCHA
+    const secretKey = API_CAPTCHA;
+    const verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
+    const remoteIP = req.connection.remoteAddress;
 
-    // Check if the user exists and compare the provided password with the hashed password
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-        // Render the login page with an error message if the credentials are invalid
-        return res.render("login", {
-            error: "Invalid username or password.",
-            bodyClass: "error-body",
+    try {
+        const response = await axios.post(verificationUrl, null, {
+            params: {
+                secret: secretKey,
+                response: recaptchaResponse,
+                remoteip: remoteIP,
+            },
         });
+
+        const { success } = response.data;
+
+        if (success) {
+            // reCAPTCHA verification succeeded, continue with login logic
+
+            // Find the user in the database based on the provided username
+            const user = await User.findOne({ username });
+
+            // Check if the user exists and compare the provided password with the hashed password
+            if (!user || !(await bcrypt.compare(password, user.password))) {
+                // Render the login page with an error message if the credentials are invalid
+                return res.render("login", {
+                    error: "Invalid username or password.",
+                    bodyClass: "error-body",
+                });
+            }
+
+            // Set the username in the session to indicate that the user is logged in
+            req.session.username = username;
+
+            const loggedInUrl = "/match";
+            // Redirect the user to the logged-in URL
+            return res.redirect(loggedInUrl);
+        } else {
+            // reCAPTCHA verification failed
+            return res.render("login", {
+                error: "reCAPTCHA verification failed. Please try again.",
+                bodyClass: "error-body",
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send("Error occurred while verifying reCAPTCHA.");
     }
-
-    // Set the username in the session to indicate that the user is logged in
-    req.session.username = username;
-
-    const loggedInUrl = "/match";
-    // Redirect the user to the logged-in URL
-    return res.redirect(loggedInUrl);
 };
 
 // Handler for rendering the signup page
