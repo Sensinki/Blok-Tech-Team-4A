@@ -1,24 +1,34 @@
-<head>
-  <title>{{ title }}</title>
-</head>
 
-<body class="{{ bodyClass }}, signup">
+<main class="{{ bodyClass }}, signup">
   <h1>Sign Up</h1>
   {{#if error}}
   <p class="error">{{error}}</p>
   {{/if}}
-  <form method="post" action="/signup">
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" required>
-    <br>
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" required>
-    <br>
+  
+  <form method="post" action="/signup" class="sign-up">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" minlength="5" placeholder="Kim123" required>
+
+    <label for="password">Password</label>
+    <input type="password" class="password" name="password" id="password" placeholder="*****" minlength="5" maxlength="50" required>
+
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" minlength="7" placeholder="mymail@gmail.com" required>
+
+    <noscript>
+      <details>
+        <summary></summary>
+        <p>Password must contain at least 1 uppercase letter, 1 number, and be minimum 5 characters long</p>
+      </details> 
+    </noscript>
+
     <input type="submit" value="Signup">
   </form>
   <a href="/login">I have an account</a>
 
-</body>
+</main>
+
+<script src="/js/validation.js"></script>
+
+
+
