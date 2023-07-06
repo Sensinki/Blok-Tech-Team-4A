@@ -1,0 +1,21 @@
+<body>
+    <h1>Liked chats</h1>
+
+    <body>
+    <section class="listLiked">
+        {{#each likedGames}}
+        <p>{{getProperty this "name"}}</p>
+         <form action="/like/{{getProperty this "_id"}}" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Delete</button>
+        </form>
+        {{/each}}
+    </section>
+
+
+
+    <a href="/">Go back to chats</a>
+    <script src="../js/like.min.js"></script>
+</body>
+
+</body>

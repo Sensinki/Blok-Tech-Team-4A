@@ -1,0 +1,34 @@
+<html class="inlog">
+
+<main class="{{#if bodyClass}}{{bodyClass}}{{/if}}">
+    <h1>Login Page</h1>
+    {{#if error}}
+    <section class="error-message">
+        <p>{{error}}</p>
+    </section>
+    {{/if}}
+    <form id="login-form" method="POST" action="/login">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Kim123" required/>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"placeholder="*****" required/>
+
+        <noscript>
+        <details>
+            <summary></summary>
+            <p>Password must contain at least 1 uppercase letter, 1 number, and be minimum 5 characters long</p>
+        </details> 
+        </noscript>
+
+        <div class="g-recaptcha" data-sitekey="6Ld8U9cmAAAAACRKgHrSpdsXaRBNB_KZRJffUbFS"></div>
+
+        <input type="submit" value="Login" />
+    </form>
+
+    <a href="/signup">I don't have an account</a>
+    
+</main>
+
+</html>
+
