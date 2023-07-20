@@ -38,7 +38,7 @@
     "querystring": "^0.2.1",
     "request": "^2.88.2",
     "slug": "^8.2.2",
-    "socket.io": "^4.6.1",
+    "socket.io": "^4.7.1",
     "web-push": "^3.6.1",
     "xss": "^1.0.14"
   },
